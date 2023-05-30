@@ -1,0 +1,44 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "start": "node .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "@nuxt/image": "^1.0.0-rc.1",
+    "@sidebase/nuxt-auth": "^0.6.0-beta.4",
+    "@types/luxon": "^3.3.1",
+    "@types/node": "^20",
+    "@vueuse/core": "^10.3.0",
+    "@vueuse/nuxt": "^10.3.0",
+    "drizzle-kit": "^0.19.13",
+    "next-auth": "^4.21.1",
+    "nuxt": "^3.6.5",
+    "nuxt-simple-sitemap": "^3.1.7",
+    "vuetify-nuxt-module": "^0.5.7"
+  },
+  "dependencies": {
+    "@date-io/luxon": "^2.17.0",
+    "@mdi/font": "^7.2.96",
+    "@nuxt/content": "^2.7.2",
+    "@nuxtjs/robots": "^3.0.0",
+    "@nuxtjs/web-vitals": "^0.2.6",
+    "@vercel/analytics": "^1.0.2",
+    "@vercel/kv": "^0.2.2",
+    "drizzle-orm": "^0.28.6",
+    "luxon": "^3.4.0",
+    "octokit": "^3.1.0",
+    "postgres": "^3.3.5",
+    "sass": "^1.66.0",
+    "sharp": "^0.32.5",
+    "twitch-player": "^2.0.2",
+    "typeface-roboto": "^1.1.13",
+    "vue": "^3.3.4",
+    "vuetify": "^3.3.13"
+  }
+}
