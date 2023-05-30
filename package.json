@@ -1,0 +1,23 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@types/node": "^18",
+    "nuxt": "^3.5.2"
+  },
+  "dependencies": {
+    "@mdi/font": "^7.2.96",
+    "@nuxt/content": "^2.6.0",
+    "sass": "^1.62.1",
+    "typeface-roboto": "^1.1.13",
+    "vue": "^3.3.4",
+    "vuetify": "^3.3.2"
+  }
+}
