@@ -1,5 +1,5 @@
 <template>
-  <v-container v-if="streamData.type === 'live'">
+  <v-container v-if="streamData?.type === 'live'">
     <v-row justify="center">
       <v-col md="12" lg="8">
         <h1
@@ -37,18 +37,20 @@
     </v-row>
     <v-row justify="center">
       <v-col cols="12" lg="8">
-        <iframe
-          :src="
-            getTwitchVodUrl(
-              'CoweringCuriousCrocodileOptimizePrime-wSOS5DlXZ9Qe2Xd3'
-            )
-          "
-          frameborder="0"
-          allowfullscreen="true"
-          scrolling="no"
-          height="100%"
-          width="100%"
-        ></iframe>
+        <ClientOnly>
+          <iframe
+            :src="
+              getTwitchVodUrl(
+                'CoweringCuriousCrocodileOptimizePrime-wSOS5DlXZ9Qe2Xd3'
+              )
+            "
+            frameborder="0"
+            allowfullscreen="true"
+            scrolling="no"
+            height="100%"
+            width="100%"
+          ></iframe>
+        </ClientOnly>
       </v-col>
     </v-row>
   </v-container>
@@ -83,11 +85,11 @@ const getTwitchVodUrl = (vodId: string) => {
   return `https://clips.twitch.tv/embed?clip=${vodId}&parent=${window.location.origin}`;
 };
 
-const streamData = ref({ type: "offline" });
+// const streamData = ref({ type: "offline" });
 
-// const { data: streamData, refresh } = await useAsyncData("streamInfo", () =>
-//   $fetch("https://kko.niki2k1.dev/twitch/stream/50985620")
-// );
+const { data: streamData, refresh } = await useAsyncData("streamInfo", () =>
+  $fetch("/api/twitch/stream/50985620")
+);
 </script>
 
 <style scoped>

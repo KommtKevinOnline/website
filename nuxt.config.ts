@@ -9,4 +9,10 @@ export default defineNuxtConfig({
     transpile: ["vuetify"],
   },
   modules: ["@nuxt/content"],
+  runtimeConfig: {
+    twitch: {
+      client_id: process.env.TWITCH_CLIENT_ID,
+      secret: process.env.TWITCH_SECRET,
+    }
+  }
 })
