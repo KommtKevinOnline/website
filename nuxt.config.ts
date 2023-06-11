@@ -8,6 +8,7 @@ export default defineNuxtConfig({
    build: {
     transpile: ["vuetify"],
   },
+  plugins: [{ src: '~/plugins/vercel.ts', mode: 'client' }],
   modules: ["@nuxt/content"],
   runtimeConfig: {
     twitch: {
