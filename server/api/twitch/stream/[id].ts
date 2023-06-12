@@ -1,4 +1,5 @@
 import { kv } from '@vercel/kv';
+import { sql } from "@vercel/postgres";
 import { StreamsResponse } from "../../../interfaces/StreamsResponse.interface";
 import { Stream } from "../../../interfaces/Stream.interface";
 import { TokenResponse } from '../../../interfaces/TokenResponse.interface';
@@ -50,5 +51,14 @@ export default defineEventHandler(async (event) => {
     stream = data.data[0]
   }
 
-  return stream || { type: 'offline' };
+  if (stream.type !== 'live') {
+    const { rows: upcomingStreams } = await sql`SELECT * FROM upcoming_streams WHERE date > NOW()`;
+
+    return {
+      type: 'offline',
+      upcoming: upcomingStreams,
+    }
+  }
+
+  return stream;
 })

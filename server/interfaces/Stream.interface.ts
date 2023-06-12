@@ -14,4 +14,5 @@ export interface Stream {
   tag_ids: string[];
   tags: string[];
   is_mature: boolean;
+  upcoming: any[];
 }

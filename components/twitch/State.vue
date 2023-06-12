@@ -22,10 +22,10 @@
 import { StreamResponse } from '../../interfaces/StreamResponse';
 
 const props = defineProps<{
-  streamInfo: StreamResponse
+  streamInfo: Partial<StreamResponse>
 }>();
 
 const thumbnail = computed(() => {
-  return props.streamInfo.thumbnail_url.replace('{width}', '1920').replace('{height}', '1080');
+  return props.streamInfo.thumbnail_url?.replace('{width}', '1920').replace('{height}', '1080');
 });
 </script>

@@ -1,42 +1,18 @@
-# Nuxt 3 Minimal Starter
+# KommtKevinOnline.de
+## Beschreibung
+Info Webseite darüber ob der Twitch Streamer Papaplatte heute Online kommt. Die Daten werden über die letzten Minuten des letzten Streams mit Speech To Text analysiert.
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Funktionsweise
+![Application Flow](public/flow.png)
 
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## 📚 Dependencies
+| Name                                          | Used for                          |
+|-----------------------------------------------|-----------------------------------|
+| [Vue](https://vuejs.org)                      | UI Framework                      |
+| [Nuxt](https://nuxt.com/)                     | SSR + Backend                     |
+| [Vuetify](https://vuetifyjs.com/)             | UI Components                     |
+| [Vercel](https://vercel.com/)                 | Hosting, Caching and Database     |
+| [Wit.ai](https://wit.ai/)                     | Audio Transcription               |
+| [Twitch API](https://dev.twitch.tv/docs/api/) | Acquiring online status and vods  |
+| [7tv](https://7tv.app/)                       | Displaying Emotes                 |
+| [Hero Patterns](https://heropatterns.com/)    | Background Pattern                |
