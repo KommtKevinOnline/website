@@ -1,5 +1,5 @@
 <template>
-  <v-card href="https://twitch.tv/papaplatte" target="_blank" color="purple-darken-2">
+  <v-card href="https://twitch.tv/papaplatte" color="purple-darken-2">
     <v-img
       :src="thumbnail"
       height="300px"

@@ -1,12 +1,16 @@
 import { kv } from '@vercel/kv';
 import { StreamsResponse } from "../../../interfaces/StreamsResponse.interface";
 import { Stream } from "../../../interfaces/Stream.interface";
+import { TokenResponse } from '../../../interfaces/TokenResponse.interface';
 
 const config = useRuntimeConfig()
 
 async function getToken(): Promise<string> {
   const res = await fetch('https://id.twitch.tv/oauth2/token', {
     method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       client_id: config.twitch.client_id,
       client_secret: config.twitch.secret,
@@ -14,9 +18,9 @@ async function getToken(): Promise<string> {
     }),
   });
 
-  const data = await res.json();
+  const data = await res.json() as TokenResponse;
 
-  return data.data.access_token;
+  return data.access_token;
 }
 
 export default defineEventHandler(async (event) => {

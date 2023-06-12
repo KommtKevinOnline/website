@@ -38,18 +38,21 @@
     <v-row justify="center">
       <v-col cols="12" lg="8">
         <ClientOnly>
-          <iframe
-            :src="
-              getTwitchVodUrl(
-                'CoweringCuriousCrocodileOptimizePrime-wSOS5DlXZ9Qe2Xd3'
-              )
-            "
-            frameborder="0"
-            allowfullscreen="true"
-            scrolling="no"
-            height="100%"
-            width="100%"
-          ></iframe>
+          <v-responsive aspectRatio="16 / 9">
+            <iframe
+              :src="
+                getTwitchVodUrl(
+                  'CoweringCuriousCrocodileOptimizePrime-wSOS5DlXZ9Qe2Xd3'
+                )
+              "
+  
+              frameborder="0"
+              allowfullscreen="true"
+              scrolling="no"
+              height="100%"
+              width="100%"
+            ></iframe>
+          </v-responsive>
         </ClientOnly>
       </v-col>
     </v-row>
@@ -82,14 +85,14 @@ const getEmoteUrl = (emoteId: string) => {
 };
 
 const getTwitchVodUrl = (vodId: string) => {
-  return `https://clips.twitch.tv/embed?clip=${vodId}&parent=${window.location.origin}`;
+  return `https://clips.twitch.tv/embed?clip=${vodId}&parent=${window.location.host}`;
 };
 
-// const streamData = ref({ type: "offline" });
+const streamData = ref({ type: "offline" });
 
-const { data: streamData, refresh } = await useAsyncData("streamInfo", () =>
-  $fetch("/api/twitch/stream/50985620")
-);
+// const { data: streamData, refresh } = await useAsyncData("streamInfo", () =>
+//   $fetch("/api/twitch/stream/50985620")
+// );
 </script>
 
 <style scoped>
