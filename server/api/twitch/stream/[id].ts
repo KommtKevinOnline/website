@@ -4,8 +4,6 @@ import { StreamsResponse } from "../../../interfaces/StreamsResponse.interface";
 import { Stream } from "../../../interfaces/Stream.interface";
 import { TokenResponse } from '../../../interfaces/TokenResponse.interface';
 
-const config = useRuntimeConfig()
-
 async function getToken(): Promise<string> {
   const res = await fetch('https://id.twitch.tv/oauth2/token', {
     method: 'POST',
@@ -13,18 +11,24 @@ async function getToken(): Promise<string> {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      client_id: config.twitch.client_id,
-      client_secret: config.twitch.secret,
+      client_id: process.env.TWITCH_CLIENT_ID,
+      client_secret: process.env.TWITCH_CLIENT_SECRET,
       grant_type: 'client_credentials',
     }),
   });
 
   const data = await res.json() as TokenResponse;
 
+  console.log(data)
+
   return data.access_token;
 }
 
 export default defineEventHandler(async (event) => {
+  if (!process.env.TWITCH_CLIENT_ID) {
+    throw new Error('Missing TWITCH_CLIENT_ID');
+  }
+
   const userId = event.context.params?.id;
   let stream: Stream; 
 
@@ -36,11 +40,13 @@ export default defineEventHandler(async (event) => {
     const res = await fetch(`https://api.twitch.tv/helix/streams?user_id=${userId}`, {
       headers: {
         Authorization: `Bearer ${await getToken()}`,
-        'client-id': config.twitch.client_id,
+        'client-id': process.env.TWITCH_CLIENT_ID,
       },
     });
 
     const data = await res.json() as StreamsResponse;
+
+    console.log(data)
 
     await kv.hset(`stream:${userId}`, {
       stream: JSON.stringify(data.data[0]),
