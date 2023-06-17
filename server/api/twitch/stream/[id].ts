@@ -46,25 +46,23 @@ export default defineEventHandler(async (event) => {
 
     const data = await res.json() as StreamsResponse;
 
-    console.log(data)
+    if (data.data.length !== 0) {
+      await kv.hset(`stream:${userId}`, {
+        stream: JSON.stringify(data.data[0]),
+      });
 
-    await kv.hset(`stream:${userId}`, {
-      stream: JSON.stringify(data.data[0]),
-    });
+      await kv.expire(`stream:${userId}`, 60 * 5);
 
-    await kv.expire(`stream:${userId}`, 60 * 5);
+      stream = data.data[0]
+    } else {
+      const { rows: upcomingStreams } = await sql`SELECT * FROM upcoming_streams WHERE date > NOW()`;
 
-    stream = data.data[0]
-  }
-
-  if (stream.type !== 'live') {
-    const { rows: upcomingStreams } = await sql`SELECT * FROM upcoming_streams WHERE date > NOW()`;
-
-    return {
-      type: 'offline',
-      upcoming: upcomingStreams,
+      return {
+        type: 'offline',
+        upcoming: upcomingStreams,
+      }
     }
   }
 
-  return stream;
+  return stream
 })

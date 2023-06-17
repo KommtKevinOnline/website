@@ -19,10 +19,10 @@
 </template>
 
 <script setup lang="ts">
-import { StreamResponse } from '../../interfaces/StreamResponse';
+import { Stream } from '../../server/interfaces/Stream.interface';
 
 const props = defineProps<{
-  streamInfo: Partial<StreamResponse>
+  streamInfo: Partial<Stream>
 }>();
 
 const thumbnail = computed(() => {
