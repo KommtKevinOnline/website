@@ -19,8 +19,6 @@ async function getToken(): Promise<string> {
 
   const data = await res.json() as TokenResponse;
 
-  console.log(data)
-
   return data.access_token;
 }
 
