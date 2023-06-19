@@ -5,8 +5,8 @@
       <img
         class="ml-4"
         :src="sevenTv.getEmoteUrl('60d1faf30256ae65b7d8c1b7')"
-        height="64px"
-        width="64px"
+        height="64"
+        width="64"
       />
     </v-col>
   </v-row>

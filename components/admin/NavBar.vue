@@ -3,13 +3,12 @@
     <v-row justify="center">
       <v-col v-if="mdAndUp" cols="2">
         <router-link to="/">
-          <img src="/qp.svg" height="40" />
+          <img src="/qp.svg" height="40"/>
         </router-link>
       </v-col>
       <v-col cols="12" md="6" class="d-flex align-center justify-end">
-        <v-btn to="/" color="white">Home</v-btn>
-        <v-btn to="/how-does-it-work" color="white" class="ml-1">Wie funktioniert das?</v-btn>
-        <v-btn to="/about" color="white" class="ml-1">Über</v-btn>
+        <v-btn to="/admin/alerts" color="white" class="ml-1" prepend-icon="mdi-bell">Alerts</v-btn>
+        <v-btn to="/admin/upcoming" color="white" class="ml-1" prepend-icon="mdi-calendar">Upcoming Streams</v-btn>
       </v-col>
     </v-row>
   </v-app-bar>

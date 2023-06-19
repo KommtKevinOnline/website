@@ -9,7 +9,9 @@
       src="/domo.webm"
     /> -->
     <v-main>
-      <AppNavBar />
+      <AdminNavBar v-if="route.path.startsWith('/admin')" />
+      <AppNavBar v-else />
+      <AppAlerts />
       <v-container>
         <slot />
       </v-container>
@@ -17,6 +19,10 @@
     </v-main>
   </v-app>
 </template>
+
+<script setup lang="ts">
+const route = useRoute();
+</script>
 
 <style scoped>
 #video-background {

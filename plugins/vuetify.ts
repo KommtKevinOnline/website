@@ -1,5 +1,6 @@
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
+import { VDataTable } from 'vuetify/labs/VDataTable'
 import * as directives from "vuetify/directives";
 import { aliases, mdi } from "vuetify/iconsets/mdi";
 import { fa } from "vuetify/iconsets/fa-svg";
@@ -9,14 +10,17 @@ export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
     ssr: true,
     blueprint: md3,
-    components,
+    components: {
+      VDataTable,
+      ...components
+    },
     directives,
     theme: {
       defaultTheme: "dark",
       themes: {
         dark: {
           colors: {
-            primary: "#0071F2",
+            primary: "#3b3b3b",
             background: "#131414",
           },
         },
