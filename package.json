@@ -14,6 +14,7 @@
     "@types/node": "^20",
     "@vueuse/core": "^10.2.0",
     "@vueuse/nuxt": "^10.2.0",
+    "next-auth": "^4.22.1",
     "nuxt": "^3.5.3"
   },
   "dependencies": {
