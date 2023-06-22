@@ -9,5 +9,8 @@ export default defineNuxtConfig({
     transpile: ["vuetify"],
   },
   plugins: [{ src: '~/plugins/vercel.ts', mode: 'client' }],
-  modules: ["@nuxt/content"],
+  modules: ["@nuxt/content", "@vueuse/nuxt", "@sidebase/nuxt-auth", "@nuxt/image"],
+  image: {
+    format: ['avif', 'webp', 'jpg']
+  }
 })

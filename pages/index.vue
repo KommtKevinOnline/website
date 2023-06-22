@@ -1,6 +1,8 @@
 <template>
   <template v-if="pending">
-    <v-progress-circular indeterminate />
+    <v-container class="d-flex justify-center">
+      <v-progress-circular indeterminate />
+    </v-container>
   </template>
   <template v-else>
     <v-container v-if="streamData?.type === 'live'">
@@ -13,12 +15,7 @@
       <v-row justify="center">
         <v-col md="12" lg="8" class="d-flex align-center">
           <h1 class="gradient" style="font-size: 64px">Nein</h1>
-          <img
-            class="ml-4"
-            :src="sevenTv.getEmoteUrl('609ef9394c18609a1d9b10e1')"
-            height="64px"
-            width="64px"
-          />
+          <nuxt-img class="ml-4" :src="sevenTv.getEmoteUrl('609ef9394c18609a1d9b10e1')" height="64px" width="64px" />
         </v-col>
       </v-row>
     </v-container>
@@ -48,7 +45,7 @@ const { data: streamData, pending, refresh } = await useLazyFetch<Stream>('/api/
 }
 
 .gradient {
-  background: -webkit-linear-gradient(200deg,#11998e, #38ef7d);
+  background: -webkit-linear-gradient(200deg, #11998e, #38ef7d);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

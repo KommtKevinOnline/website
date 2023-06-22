@@ -1,21 +1,10 @@
 <template>
   <v-app>
-    <!-- <img src="/domo.webp" id="image-background" />
-    <video
-      autoPlay
-      muted
-      loop
-      id="video-background"
-      src="/domo.webm"
-    /> -->
     <v-main>
-      <AdminNavBar v-if="route.path.startsWith('/admin')" />
-      <AppNavBar v-else />
-      <AppAlerts />
+      <AdminNavBar />
       <v-container>
         <slot />
       </v-container>
-      <!-- <AppFooter /> -->
     </v-main>
   </v-app>
 </template>
@@ -23,28 +12,6 @@
 <script setup lang="ts">
 const route = useRoute();
 </script>
-
-<style scoped>
-#video-background {
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  z-index: -1;
-  filter: blur(5px);
-  object-fit: cover;
-  transform: scale(1.1); 
-}
-
-#image-background {
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  z-index: -1;
-  filter: blur(5px);
-  object-fit: cover;
-  transform: scale(1.1); 
-}
-</style>
 
 <style>
 .v-application {
