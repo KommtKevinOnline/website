@@ -1,16 +1,9 @@
 <template>
   <v-row justify="center">
     <v-col md="12" lg="8">
-      <h1
-        class="gradient text-online"
-      >
+      <h1 class="gradient text-online">
         Kevin ist Online
-        <img
-          class="ml-4"
-          :src="sevenTv.getEmoteUrl('603cb17bc20d020014423c29')"
-          height="64"
-          width="64"
-        />
+        <nuxt-img class="ml-4" :src="sevenTv.getEmoteUrl('603cb17bc20d020014423c29')" height="64" width="64" />
       </h1>
     </v-col>
   </v-row>

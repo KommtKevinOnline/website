@@ -2,9 +2,7 @@ import { sql } from "@vercel/postgres";
 
 export default defineEventHandler(async (event) => {
   try {
-    const { rows: alerts } = await sql`SELECT * FROM alerts WHERE active = true`;
-  
-    return alerts as { id: number; title: string; text: string; }[];
+    await sql`DELETE FROM alerts WHERE id = ${event.context.params?.id};`;
   } catch (error) {
     console.error(error)
   }
