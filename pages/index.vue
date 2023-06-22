@@ -19,6 +19,17 @@
         </v-col>
       </v-row>
     </v-container>
+    <ClientOnly>
+      <v-row class="mt-8" justify="center">
+        <v-col cols="4">
+          <twitter-embed />
+        </v-col>
+        <v-col cols="4">
+          <iframe :src="`https://www.twitch.tv/embed/Papaplatte/chat?parent=${origin}`" height="500px" width="100%">
+          </iframe>
+        </v-col>
+      </v-row>
+    </ClientOnly>
   </template>
 </template>
 
@@ -31,6 +42,8 @@ useHead({
 });
 
 const sevenTv = use7tv()
+
+const origin = computed(() => window.location.host)
 
 const { data: streamData, pending, refresh } = await useLazyFetch<Stream>('/api/twitch/stream/50985620');
 </script>
