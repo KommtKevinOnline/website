@@ -1,5 +1,5 @@
 <template>
-  <a class="twitter-timeline" :href="`https://twitter.com/${user}?ref_src=twsrc%5Etfw`" data-height="500px"
+  <a class="twitter-timeline" :href="`https://twitter.com/${user}?ref_src=twsrc%5Etfw`" data-height="800px"
     data-chrome="transparent">
     Tweets von {{ user }}
   </a>
