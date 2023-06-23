@@ -12,6 +12,11 @@
       <TwitchIsOffline />
     </v-container>
     <v-container v-else>
+      <v-row justify="center" dense>
+        <v-col md="12" lg="8">
+          <h2>Wird Kevin heute Online kommen?</h2>
+        </v-col>
+      </v-row>
       <v-row justify="center">
         <v-col md="12" lg="8" class="d-flex align-center">
           <h1 class="gradient" style="font-size: 64px">Nein</h1>
@@ -19,6 +24,16 @@
         </v-col>
       </v-row>
     </v-container>
+    <ClientOnly>
+      <v-row class="mt-8" justify="center">
+        <v-col md="12" lg="4">
+          <twitter-embed />
+        </v-col>
+        <v-col md="12" lg="4">
+          <twitch-embed />
+        </v-col>
+      </v-row>
+    </ClientOnly>
   </template>
 </template>
 
@@ -32,7 +47,7 @@ useHead({
 
 const sevenTv = use7tv()
 
-const { data: streamData, pending, refresh } = await useLazyFetch<Stream>('/api/twitch/stream/50985620');
+const { data: streamData, pending } = await useLazyFetch<Stream>('/api/twitch/stream/50985620');
 </script>
 
 <style scoped>
