@@ -1,6 +1,7 @@
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import { VDataTable } from 'vuetify/labs/VDataTable'
+import { VDatePicker } from 'vuetify/labs/VDatePicker'
 import * as directives from "vuetify/directives";
 import { aliases, mdi } from "vuetify/iconsets/mdi";
 import { fa } from "vuetify/iconsets/fa-svg";
@@ -12,6 +13,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     blueprint: md3,
     components: {
       VDataTable,
+      VDatePicker,
       ...components
     },
     directives,

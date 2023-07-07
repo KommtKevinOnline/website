@@ -3,6 +3,7 @@
     <v-col cols="8">
       <v-card color="primary">
         <v-card-title class="d-flex">
+          <v-icon class="mr-2" color="white">mdi-bell</v-icon>
           Alerts
           <admin-alert-modal ref="modal" :refresh="refresh" class="ml-auto" />
         </v-card-title>
@@ -34,7 +35,7 @@ const headers = ref([
   { title: 'Aktion', key: 'actions' },
 ])
 
-const { data: alerts, refresh } = await useLazyFetch('/api/admin/alerts/all');
+const { data: alerts, refresh } = await useLazyFetch<{ id: number, title: string, text: string, active: boolean }[]>('/api/admin/alerts/all');
 
 const modal = ref()
 const removeLoading = ref(false)
@@ -46,7 +47,7 @@ function edit(item: typeof alerts) {
 
 async function remove(id: number) {
   removeLoading.value = true
-  await fetch(`/api/alerts/remove/${id}`)
+  await fetch(`/api/admin/alerts/remove/${id}`)
   refresh()
   removeLoading.value = false
 }
