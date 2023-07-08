@@ -15,10 +15,6 @@ export default defineNuxtConfig({
   },
   // Fixes error when hotreloading (https://github.com/lovell/sharp/issues/3295)
   nitro: {
-    serverAssets: [{
-      baseName: 'overlays',
-      dir: '../public/thumbnail/overlays'
-    }],
     hooks: {
       'dev:reload': () => require('sharp')
     }

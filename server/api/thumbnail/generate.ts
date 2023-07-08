@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event)
   const { originalThumbnail, overlayId, flipX } = body
 
-  const overlays = useStorage('assets:overlays')
+  const overlays = useStorage('assets:server:overlays')
 
   const thumbnail = await fetch(originalThumbnail);
   const overlay = await overlays.getItemRaw(`${overlayId}.png`)

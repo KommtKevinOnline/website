@@ -10,7 +10,7 @@
   <v-row v-if="url !== ''">
     <v-col cols="12" lg="6">
       <v-img :src="thumbnailUrl" aspect-ratio="16/9">
-        <v-img :src="`/thumbnail/overlays/${active}.png`" class="h-100 w-100" :class="flip ? '' : 'flipX'" />
+        <v-img :src="`/api/thumbnail/image/${active}`" class="h-100 w-100" :class="flip ? '' : 'flipX'" />
       </v-img>
     </v-col>
     <v-col cols="12" lg="6">
@@ -19,7 +19,7 @@
           <v-card :style="`aspect-ratio: 16/9; background-image: url(${thumbnailUrl}); background-size: cover;`"
             @click="active = i">
             <template #image>
-              <v-img :class="flip ? '' : 'flipX'" :src="`/thumbnail/overlays/${i}.png`" />
+              <v-img :class="flip ? '' : 'flipX'" :src="`/api/thumbnail/image/${i}`" />
             </template>
             <template #prepend v-if="i === active" class="bg-grey">
               <v-icon icon="mdi-check" size="large" color="light-green-accent-3" />
