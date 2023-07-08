@@ -12,5 +12,15 @@ export default defineNuxtConfig({
   modules: ["@nuxt/content", "@vueuse/nuxt", "@sidebase/nuxt-auth", "@nuxt/image"],
   image: {
     format: ['avif', 'webp', 'jpg']
+  },
+  // Fixes error when hotreloading (https://github.com/lovell/sharp/issues/3295)
+  nitro: {
+    serverAssets: [{
+      baseName: 'overlays',
+      dir: '../public/thumbnail/overlays'
+    }],
+    hooks: {
+      'dev:reload': () => require('sharp')
+    }
   }
 })

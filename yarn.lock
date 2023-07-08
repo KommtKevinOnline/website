@@ -5842,7 +5842,7 @@ setprototypeof@1.2.0:
 
 sharp@^0.32.1:
   version "0.32.1"
-  resolved "https://registry.npmjs.org/sharp/-/sharp-0.32.1.tgz"
+  resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.32.1.tgz#41aa0d0b2048b2e0ee453d9fcb14ec1f408390fe"
   integrity sha512-kQTFtj7ldpUqSe8kDxoGLZc1rnMFU0AO2pqbX6pLy3b7Oj8ivJIdoKNwxHVQG2HN6XpHPJqCSM2nsma2gOXvOg==
   dependencies:
     color "^4.2.3"

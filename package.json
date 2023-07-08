@@ -25,6 +25,7 @@
     "@vercel/postgres": "^0.4.0",
     "primevue": "^3.29.2",
     "sass": "^1.63.6",
+    "sharp": "^0.32.1",
     "typeface-roboto": "^1.1.13",
     "vue": "^3.3.4",
     "vuetify": "^3.3.7"
