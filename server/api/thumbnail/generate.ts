@@ -4,12 +4,10 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event)
   const { originalThumbnail, overlayId, flipX } = body
 
-  const overlays = useStorage('assets:server:overlays')
-
   const thumbnail = await fetch(originalThumbnail);
-  const overlay = await overlays.getItemRaw(`${overlayId}.png`)
+  const overlay = await fetch(`${process.env.AUTH_ORIGIN}/overlays/${overlayId}.png`);
 
-  const overlayImg = sharp(overlay).flop(flipX)
+  const overlayImg = sharp(await overlay.arrayBuffer()).flop(flipX)
   const metadata = await overlayImg.metadata()
 
   const image = await sharp(await thumbnail.arrayBuffer())
