@@ -36,7 +36,6 @@
     "postgres": "^3.3.5",
     "sass": "^1.68.0",
     "sharp": "^0.32.6",
-    "twitch-player": "^2.0.2",
     "typeface-roboto": "^1.1.13",
     "vue": "^3.3.4",
     "vuetify": "^3.3.17"
