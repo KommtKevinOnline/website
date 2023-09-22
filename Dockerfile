@@ -1,21 +1,24 @@
 FROM node:lts-slim as base
 
-ARG PORT=3000
+# Install PNPM
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
-ENV NODE_ENV=production
+ARG PORT=3000
 
 WORKDIR /src
 
 # Build
 FROM base as build
 
-COPY --link package.json package-lock.json ./
-RUN npm install --production=false
+COPY --link package.json pnpm-lock.yaml ./
+RUN pnpm install
 
 COPY --link . .
 
-RUN npm run build
-RUN npm prune
+RUN pnpm build
+RUN pnpm prune
 
 # Run
 FROM base
@@ -23,7 +26,6 @@ FROM base
 ENV PORT=$PORT
 
 COPY --from=build /src/.output /src/.output
-# Optional, only needed if you rely on unbundled dependencies
-# COPY --from=build /src/node_modules /src/node_modules
+COPY --from=build /src/node_modules /src/node_modules
 
 CMD [ "node", ".output/server/index.mjs" ]

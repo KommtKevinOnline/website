@@ -40,6 +40,7 @@
     "twitch-player": "^2.0.2",
     "typeface-roboto": "^1.1.13",
     "vue": "^3.3.4",
+    "vue-router": "^4.2.5",
     "vuetify": "^3.3.17"
   }
 }
