@@ -2,7 +2,7 @@ import { StreamsResponse } from "../../../interfaces/StreamsResponse.interface";
 import { Stream } from "../../../interfaces/Stream.interface";
 import { TokenResponse } from "../../../interfaces/TokenResponse.interface";
 import { db } from "../../../db";
-import { vodsTable } from "../../../../db/schema";
+import { vods } from "../../../../db/schema";
 import { desc } from "drizzle-orm";
 
 async function getToken(): Promise<string> {
@@ -29,7 +29,6 @@ export default defineEventHandler(async (event) => {
   }
 
   const userId = event.context.params?.id;
-  let stream: Stream;
 
   const res = await fetch(
     `https://api.twitch.tv/helix/streams?user_id=${userId}`,
@@ -47,14 +46,12 @@ export default defineEventHandler(async (event) => {
   if (data.data.length !== 0) {
     return data.data[0];
   } else {
-    //TODO: Upcoming should be replaced with vods.
-    // If offline: look in db for recent vods
-
-    // const upcoming = await db.select().from(vodsTable).orderBy(desc(vodsTable.date)).limit(1)
+    // If offline: look in db for most recent vod
+    const lastVod = await db.query.vods.findFirst({ orderBy: [desc(vods.date)] })
 
     return {
       type: "offline",
-      upcoming: [],
+      lastVod,
     };
   }
 });

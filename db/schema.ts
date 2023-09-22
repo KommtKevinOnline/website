@@ -1,6 +1,6 @@
 import { boolean, integer, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
 
-export const vodsTable = pgTable('vods', {
+export const vods = pgTable('vods', {
   transcript: text('transcript').notNull(),
   vodid: varchar('vodid', { length: 256 }).default('').primaryKey(),
   title: text('title').default(''),
@@ -12,7 +12,7 @@ export const vodsTable = pgTable('vods', {
   onlineIntend: boolean('online_intend').default(false),
 });
 
-export const alertsTable = pgTable('alerts', {
+export const alerts = pgTable('alerts', {
   id: serial('id').primaryKey(),
   title: varchar('title', { length: 256 }).default(''),
   text: text('text').default(''),

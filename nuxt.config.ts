@@ -52,7 +52,7 @@ export default defineNuxtConfig({
     format: ['avif', 'webp', 'jpg']
   },
   routeRules: {
-    '/': { swr: 300 },
+    // '/': { swr: 300 },
     '/about': { prerender: true },
     '/admin/**': { index: false },
   },
