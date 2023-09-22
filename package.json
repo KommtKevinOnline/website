@@ -31,6 +31,7 @@
     "@vercel/analytics": "^1.0.2",
     "@vercel/kv": "^0.2.3",
     "drizzle-orm": "^0.28.6",
+    "h3": "^1.8.1",
     "luxon": "^3.4.3",
     "octokit": "^3.1.0",
     "postgres": "^3.3.5",
