@@ -47,9 +47,6 @@ dependencies:
   sharp:
     specifier: ^0.32.6
     version: 0.32.6
-  twitch-player:
-    specifier: ^2.0.2
-    version: 2.0.2
   typeface-roboto:
     specifier: ^1.1.13
     version: 1.1.13
@@ -7086,11 +7083,6 @@ packages:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
     dependencies:
       safe-buffer: 5.2.1
-
-  /twitch-player@2.0.2:
-    resolution: {integrity: sha512-X9UEleuHoL8oJF0LCseYr0iB1bpKJ2gwjvSviz38KuK2V0r8fVlL707t2V75+1HFM2uXaHoIeIKsvzoPWcNZlA==}
-    engines: {node: '>=10'}
-    dev: false
 
   /type-fest@0.21.3:
     resolution: {integrity: sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==}

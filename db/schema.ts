@@ -8,7 +8,7 @@ export const vods = pgTable('vods', {
   url: varchar('url', { length: 256 }).default(''),
   thumbnail: varchar('thumbnail', { length: 256 }).default(''),
   viewCount: integer('view_count').default(0),
-  onlineIntendDate: timestamp('online_intend_date'),
+  onlineIntendDate: varchar('online_intend_date', { length: 256 }).default(''),
   onlineIntend: boolean('online_intend').default(false),
 });
 
