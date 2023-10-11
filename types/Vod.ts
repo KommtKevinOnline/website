@@ -1,5 +1,7 @@
+import { Transcript } from "./Transcript"
+
 export type Vod = {
-  transcript: string
+  transcript: Transcript
   vodid: string
   title: string
   date: string
@@ -7,5 +9,5 @@ export type Vod = {
   thumbnail: string
   view_count: string
   online_intend_date: string
-  online_intend: true
+  duration: number
 }

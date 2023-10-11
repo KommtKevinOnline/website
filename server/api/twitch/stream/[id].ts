@@ -42,16 +42,24 @@ export default defineEventHandler(async (event) => {
   const data = await res.json() as StreamsResponse;
 
   // If online: return twitch data
-  if (data.data.length !== 0) {
-    return data.data[0]
-  } else {
-    // If offline: look in db for vods
+  // if (data.data.length !== 0) {
+  //   return data.data[0]
+  // } else {
+  // If offline: look in db for vods
 
-    const upcoming = await db.select().from(vodsTable).orderBy(desc(vodsTable.date)).limit(1)
+  const upcoming = (await db.select().from(vodsTable).orderBy(desc(vodsTable.date)).limit(1))[0]
 
-    return {
-      type: 'offline',
-      upcoming,
-    }
+  try {
+    const transcript = JSON.parse(upcoming.transcript)
+
+    upcoming.transcript = transcript
+  } catch (e) {
+    console.log(e)
   }
+
+  return {
+    type: 'offline',
+    upcoming: [upcoming],
+  }
+  // }
 })

@@ -12,7 +12,9 @@
   </v-row>
   <v-row justify="center">
     <v-col cols="12" lg="6" class="d-flex flex-column">
-      <subtitle />
+      {{ duration }}
+      {{ currentTime }}
+      <subtitle :vod="upcoming" :time="currentTime" :duration="duration" />
     </v-col>
   </v-row>
 </template>
@@ -31,11 +33,14 @@ useHead({
 const props = defineProps<{ upcoming: Vod }>();
 const sevenTv = use7tv();
 
+const currentTime = ref(0)
+const duration = ref(0)
+
 onMounted(() => {
   const options = {
     width: 750,
     height: 422,
-    video: "1930435547",
+    video: props.upcoming.vodid,
     parent: ["localhost"],
     autoplay: true,
     muted: true
@@ -43,14 +48,16 @@ onMounted(() => {
   // @ts-ignore
   const player = new Twitch.Player("player", options);
 
-  player.addEventListener('ready', () => {
-    player.seek(100);
-  })
-})
+  // @ts-ignore
+  player.addEventListener(Twitch.Player.READY, () => {
+    setInterval(() => {
+      duration.value = player.getDuration() - (60 * 2.5)
+      currentTime.value = player.getCurrentTime()
+    }, 900)
 
-const getTwitchVodUrl = (vodId: string) => {
-  return `https://player.twitch.tv?video=1930435547&parent=localhost`;
-};
+    player.seek(37062.088)
+  });
+})
 </script>
 
 <style scoped>

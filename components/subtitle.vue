@@ -1,34 +1,37 @@
 <template>
-  <h3 :class="{ msg: true, active: activeText === index }" v-for="(msg, index) in messages">
-    {{ msg }}
+  <h3 :class="{ msg: true, active: activeText === index }" class="d-flex flex-column" v-for="(segment, index) in segments.filter(segment => time > segment.start && time < segment.end)">
+    <!-- <span>start: {{ segment.start }}</span>
+    <span>end:   {{ segment.end }}</span>
+    <span>gts:   {{ time > segment.start }}</span>
+    <span>gte:   {{ time < segment.end }}</span> -->
+    <span>{{ segment.text }}</span>
   </h3>
 </template>
 
-<script setup>
-import { onMounted } from 'vue'
-import { ref, computed } from 'vue'
+<script setup lang="ts">
+import { Vod } from '../types/Vod'
+
+const props = defineProps<{ vod: Vod, time: number, duration: number }>();
 
 const activeText = ref(0)
 
 onMounted(() => {
-  setInterval(() => {
-    if (activeText.value + 1 >= messages.value.length) {
-      activeText.value = 0
-    }
+  // setInterval(() => {
+  //   if (activeText.value + 1 >= segments.value.length) {
+  //     activeText.value = 0
+  //   }
 
-    activeText.value += 1
-  }, 1500)
+  //   activeText.value += 1
+  // }, 1500)
 })
 
-const messages = computed(() => {
-  return `Channel ist auch nicht mehr so weit weg. Bro crazy. Freunde, falls ihr
-        den Rection Channel noch nicht abgelehnt habt, rein da. Rein in die
-        Masse. Freunde, ich wünsche euch einen wundervollen Abend. Danke fürs
-        Einschalten.
-        Vielen Dank für den Support und äh danke für eure. Wir sehen uns morgen
-        wieder. 15 Uhr wie immer Kann ich irgendwas für morgen hinnouncen? Ich
-        weiß nicht genau, was morgen abgeht, um ehrlich zu sein.`.split('. ')
-})
+const segments = computed(() => props.vod.transcript.segments.map(segment => {
+  return {
+    ...segment,
+    start: segment.start + props.duration,
+    end: segment.end + props.duration
+  }
+}))
 </script>
 
 <style scoped>
