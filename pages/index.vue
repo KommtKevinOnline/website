@@ -9,7 +9,7 @@
     <v-container v-if="streamData.type === 'live'">
       <TwitchIsLive :streamData="streamData" />
     </v-container>
-    <v-container v-else-if="streamData.type === 'offline' && streamData.lastVod?.onlineIntend === true">
+    <v-container v-else-if="streamData.type === 'offline' && !!streamData.lastVod?.onlineIntendDate">
       <TwitchOnlineIntend :vod="streamData.lastVod" />
     </v-container>
     <v-container v-else>
