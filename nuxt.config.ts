@@ -10,7 +10,6 @@ export default defineNuxtConfig({
   build: {
     transpile: ["vuetify"],
   },
-  plugins: [{ src: '~/plugins/vercel.ts', mode: 'client' }],
   modules: [
     "vuetify-nuxt-module",
     "@nuxt/content",
