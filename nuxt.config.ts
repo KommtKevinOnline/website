@@ -52,7 +52,6 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/': { swr: 300 },
-    '/about': { prerender: true },
     '/admin/**': { index: false },
   },
   robots: {
