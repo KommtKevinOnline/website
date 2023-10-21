@@ -7,15 +7,10 @@
       @click.stop="drawer = !drawer"
     ></v-app-bar-nav-icon>
     <v-row justify="center">
-      <v-col class="d-flex align-center" cols="2">
-        <router-link to="/">
-          <nuxt-img src="/qp.svg" height="40" />
-        </router-link>
-      </v-col>
       <v-col
         cols="12"
         md="6"
-        class="d-flex align-center justify-end"
+        class="d-flex align-center justify-center"
         v-if="mdAndUp"
       >
         <v-btn to="/" color="white">Home</v-btn>
