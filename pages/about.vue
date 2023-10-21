@@ -27,5 +27,6 @@ const octokit = new Octokit({
   },
 });
 
-const { data: user } = useAsyncData(() => octokit.rest.users.getByUsername({ username: 'niki2k1' }), { transform: (data) => data.data })
+const res = await octokit.rest.users.getByUsername({ username: "niki2k1" });
+const user = ref(res.data);
 </script>
