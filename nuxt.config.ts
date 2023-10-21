@@ -10,7 +10,6 @@ export default defineNuxtConfig({
   build: {
     transpile: ["vuetify"],
   },
-  plugins: [{ src: '~/plugins/vercel.ts', mode: 'client' }],
   modules: [
     "vuetify-nuxt-module",
     "@nuxt/content",
@@ -52,8 +51,7 @@ export default defineNuxtConfig({
     format: ['avif', 'webp', 'jpg']
   },
   routeRules: {
-    // '/': { swr: 300 },
-    '/about': { prerender: true },
+    '/': { swr: 300 },
     '/admin/**': { index: false },
   },
   robots: {

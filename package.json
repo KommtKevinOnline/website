@@ -10,34 +10,34 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
-    "@nuxt/image": "^1.0.0-rc.1",
-    "@sidebase/nuxt-auth": "^0.6.0-beta.5",
-    "@types/luxon": "^3.3.2",
+    "@nuxt/image": "^1.0.0",
+    "@sidebase/nuxt-auth": "^0.6.0-rc.0",
+    "@types/luxon": "^3.3.3",
     "@types/node": "^20",
-    "@vueuse/core": "^10.4.1",
-    "@vueuse/nuxt": "^10.4.1",
+    "@vueuse/core": "^10.5.0",
+    "@vueuse/nuxt": "^10.5.0",
     "drizzle-kit": "^0.19.13",
-    "next-auth": "^4.21.1",
-    "nuxt": "^3.7.3",
-    "nuxt-simple-sitemap": "^3.3.4",
-    "vuetify-nuxt-module": "^0.5.12"
+    "next-auth": "~4.22.5",
+    "nuxt": "^3.8.0",
+    "nuxt-simple-sitemap": "^3.4.0",
+    "vuetify-nuxt-module": "^0.5.16"
   },
   "dependencies": {
     "@date-io/luxon": "^2.17.0",
-    "@mdi/font": "^7.2.96",
-    "@nuxt/content": "^2.8.2",
+    "@mdi/font": "^7.3.67",
+    "@nuxt/content": "^2.8.5",
     "@nuxtjs/robots": "^3.0.0",
     "@nuxtjs/web-vitals": "^0.2.6",
-    "@vercel/analytics": "^1.0.2",
-    "@vercel/kv": "^0.2.3",
     "drizzle-orm": "^0.28.6",
+    "h3": "^1.8.2",
     "luxon": "^3.4.3",
-    "octokit": "^3.1.0",
-    "postgres": "^3.3.5",
-    "sass": "^1.68.0",
+    "octokit": "^3.1.1",
+    "postgres": "^3.4.0",
+    "sass": "^1.69.4",
     "sharp": "^0.32.6",
     "typeface-roboto": "^1.1.13",
-    "vue": "^3.3.4",
-    "vuetify": "^3.3.17"
+    "vue": "^3.3.6",
+    "vue-router": "^4.2.5",
+    "vuetify": "^3.3.22"
   }
 }

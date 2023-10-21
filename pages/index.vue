@@ -5,12 +5,12 @@
       <v-progress-circular class="ml-2" indeterminate />
     </v-container>
   </template>
-  <template v-else>
-    <v-container v-if="streamData?.type === 'live'">
+  <template v-else-if="streamData">
+    <v-container v-if="streamData.type === 'live'">
       <TwitchIsLive :streamData="streamData" />
     </v-container>
-    <v-container v-else-if="(streamData?.upcoming.length || 0) > 0">
-      <TwitchIsOffline :upcoming="streamData?.upcoming[0]" />
+    <v-container v-else-if="streamData.type === 'offline' && !!streamData.lastVod?.onlineIntendDate">
+      <TwitchOnlineIntend :vod="streamData.lastVod" />
     </v-container>
     <v-container v-else>
       <v-row justify="center" dense>
@@ -52,9 +52,7 @@ useHead({
 
 const sevenTv = use7tv();
 
-const { data: streamData, pending } = await useAsyncData<Stream>(
-  () => $fetch("/api/twitch/stream/50985620"),
-);
+const { data: streamData, pending } = await useFetch<Stream>('/api/twitch/stream/50985620')
 </script>
 
 <style scoped>

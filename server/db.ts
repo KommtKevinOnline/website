@@ -1,7 +1,8 @@
 import postgres from "postgres";
-import { PostgresJsDatabase, drizzle } from 'drizzle-orm/postgres-js'
+import { drizzle } from 'drizzle-orm/postgres-js'
+import * as schema from '../db/schema'
 
 const runtimeConfig = useRuntimeConfig();
 
 export const queryClient = postgres(runtimeConfig.app.postgresUrl);
-export const db: PostgresJsDatabase = drizzle(queryClient);
+export const db = drizzle(queryClient, { schema });
