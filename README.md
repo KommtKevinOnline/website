@@ -12,7 +12,8 @@ Info Webseite darüber ob der Twitch Streamer Papaplatte heute Online kommt. Die
 | [Nuxt](https://nuxt.com/)                     | SSR + Backend                     |
 | [Vuetify](https://vuetifyjs.com/)             | UI Components                     |
 | [Postgres](https://www.postgresql.org/)       | Database                          |
-| [Wit.ai](https://wit.ai/)                     | Audio Transcription               |
+| [Whisper](https://openai.com/research/whisper)| Audio Transcription               |
+| [ChatGPT](https://openai.com/blog/chatgpt)    | Text Classification               |
 | [Twitch API](https://dev.twitch.tv/docs/api/) | Acquiring online status and vods  |
 | [7tv](https://7tv.app/)                       | Displaying Emotes                 |
 | [Hero Patterns](https://heropatterns.com/)    | Background Pattern                |
