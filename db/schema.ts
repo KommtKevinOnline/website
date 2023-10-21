@@ -9,7 +9,6 @@ export const vods = pgTable('vods', {
   thumbnail: varchar('thumbnail', { length: 256 }).default(''),
   viewCount: integer('view_count').default(0),
   onlineIntendDate: varchar('online_intend_date', { length: 256 }).default(''),
-  onlineIntend: boolean('online_intend').default(false),
 });
 
 export const alerts = pgTable('alerts', {
