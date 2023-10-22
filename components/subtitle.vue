@@ -54,11 +54,14 @@ const currentSegmentY = computed(() => {
 }
 
 .subtitles {
+  container-type: inline-size;
   transition: all 250ms ease-in-out;
 }
 
 .msg {
   opacity: 50%;
+  font-size: 5cqw;
+  overflow: hidden;
 }
 
 .active {

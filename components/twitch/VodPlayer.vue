@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" v-if="props.vod.vodid && props.vod.vodid !== ''">
-    <v-col cols="12" lg="8" class="d-flex align-center justify-center">
-      <div id="player"></div>
+    <v-col cols="12" lg="8" class="d-flex align-center justify-center pa-0">
+      <div id="player" style="aspect-ratio: 16/9"></div>
     </v-col>
   </v-row>
   <v-row justify="center">
@@ -29,8 +29,8 @@ const duration = ref(0);
 
 onMounted(() => {
   const options = {
-    width: 750,
-    height: 422,
+    width: "100%",
+    height: "100%",
     video: props.vod.vodid,
     parent: ["localhost"],
     autoplay: true,
