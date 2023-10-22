@@ -65,6 +65,7 @@
       </v-card>
     </v-col>
   </v-row>
+  <twitch-vod-player v-if="vod" :vod="vod" />
 </template>
 
 <script setup lang="ts">
@@ -73,12 +74,15 @@ const props = defineProps<{ vod?: typeof vods.$inferSelect }>();
 
 const sevenTv = use7tv();
 
-const nextStreamingIntends = computed(() =>
-  props.vod?.onlineIntendDate
-    ?.split(",")
+const nextStreamingIntends = computed(() => {
+  const onlineIntendDates = props.vod?.onlineIntendDate?.split(",");
+
+  if (!onlineIntendDates) return [];
+
+  return onlineIntendDates
     .map((date) => new Date(date))
-    .sort((a, b) => a.getTime() - b.getTime())
-);
+    .sort((a, b) => a.getTime() - b.getTime());
+});
 
 const isLate = computed(() => {
   let isLate = false;

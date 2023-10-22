@@ -1,7 +1,7 @@
-import { boolean, integer, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { boolean, integer, pgTable, serial, text, timestamp, varchar, json } from 'drizzle-orm/pg-core';
 
 export const vods = pgTable('vods', {
-  transcript: text('transcript').notNull(),
+  transcript: json('transcript').notNull(),
   vodid: varchar('vodid', { length: 256 }).default('').primaryKey(),
   title: text('title').default(''),
   date: timestamp('date'),
@@ -9,6 +9,7 @@ export const vods = pgTable('vods', {
   thumbnail: varchar('thumbnail', { length: 256 }).default(''),
   viewCount: integer('view_count').default(0),
   onlineIntendDate: varchar('online_intend_date', { length: 256 }).default(''),
+  duration: integer('duration'),
 });
 
 export const alerts = pgTable('alerts', {

@@ -1,48 +1,68 @@
 <template>
-  <h3 :class="{ msg: true, active: activeText === index }" class="d-flex flex-column" v-for="(segment, index) in segments.filter(segment => time > segment.start && time < segment.end)">
-    <!-- <span>start: {{ segment.start }}</span>
-    <span>end:   {{ segment.end }}</span>
-    <span>gts:   {{ time > segment.start }}</span>
-    <span>gte:   {{ time < segment.end }}</span> -->
-    <span>{{ segment.text }}</span>
-  </h3>
+  <div class="subtitleWrapper" :style="{ height: `${TEXT_HEIGHT * 3}px` }">
+    <div
+      class="subtitles"
+      :style="`transform: translateY(-${currentSegmentY}px)`"
+    >
+      <h3
+        class="msg text-center"
+        :class="{ active: currentSegment === index }"
+        :style="`height: ${TEXT_HEIGHT}px`"
+        v-for="(segment, index) in segments"
+      >
+        {{ segment.text }}
+      </h3>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { Vod } from '../types/Vod'
+import { Vod } from "../types/Vod";
 
-const props = defineProps<{ vod: Vod, time: number, duration: number }>();
+const TEXT_HEIGHT = 70;
 
-const activeText = ref(0)
+const props = defineProps<{ vod: Vod; time: number }>();
 
-onMounted(() => {
-  // setInterval(() => {
-  //   if (activeText.value + 1 >= segments.value.length) {
-  //     activeText.value = 0
-  //   }
+const segments = computed(() =>
+  props.vod.transcript.segments?.map((segment) => {
+    return {
+      ...segment,
+      start: segment.start + props.vod.duration,
+      end: segment.end + props.vod.duration,
+    };
+  })
+);
 
-  //   activeText.value += 1
-  // }, 1500)
-})
+const currentSegment = computed(() => {
+  if (!segments.value) return null;
 
-const segments = computed(() => props.vod.transcript.segments.map(segment => {
-  return {
-    ...segment,
-    start: segment.start + props.duration,
-    end: segment.end + props.duration
-  }
-}))
+  return segments.value.findIndex(
+    (segment) => segment.start <= props.time && segment.end >= props.time
+  );
+});
+
+const currentSegmentY = computed(() => {
+  if (!currentSegment.value) return null;
+
+  return (currentSegment.value - 1) * TEXT_HEIGHT;
+});
 </script>
 
 <style scoped>
+.subtitleWrapper {
+  overflow: hidden;
+}
+
+.subtitles {
+  transition: all 250ms ease-in-out;
+}
+
 .msg {
   opacity: 50%;
-  transition: all 250ms ease-in-out;
 }
 
 .active {
   opacity: 100%;
-  font-size: 130%;
 }
 
 .msg:hover {
