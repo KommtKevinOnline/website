@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" v-if="props.vod.vodid && props.vod.vodid !== ''">
     <v-col cols="12" lg="8" class="d-flex align-center justify-center pa-0">
-      <div id="player" style="aspect-ratio: 16/9"></div>
+      <div id="player" class="w-100" style="aspect-ratio: 16/9"></div>
     </v-col>
   </v-row>
   <v-row justify="center">
