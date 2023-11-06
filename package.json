@@ -19,14 +19,14 @@
     "@vueuse/nuxt": "^10.5.0",
     "drizzle-kit": "^0.19.13",
     "next-auth": "~4.22.5",
-    "nuxt": "^3.8.0",
+    "nuxt": "^3.8.1",
     "nuxt-simple-sitemap": "^3.4.0",
     "vuetify-nuxt-module": "^0.5.16"
   },
   "dependencies": {
     "@date-io/luxon": "^2.17.0",
     "@mdi/font": "^7.3.67",
-    "@nuxt/content": "^2.8.5",
+    "@nuxt/content": "^2.9.0",
     "@nuxtjs/robots": "^3.0.0",
     "@nuxtjs/web-vitals": "^0.2.6",
     "ackee-tracker": "^5.1.0",
