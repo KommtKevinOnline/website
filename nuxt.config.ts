@@ -17,26 +17,27 @@ export default defineNuxtConfig({
     "@sidebase/nuxt-auth",
     "@nuxt/image",
     "@nuxtjs/robots",
-    "nuxt-simple-sitemap"
+    "nuxt-simple-sitemap",
+    "@nuxt/test-utils/module",
   ],
   auth: {
-    baseURL: process.env.AUTH_ORIGIN
+    baseURL: process.env.AUTH_ORIGIN,
   },
   runtimeConfig: {
     app: {
-      postgresUrl: ''
+      postgresUrl: "",
     },
     public: {
-      ackeeHost: '',
-      ackeeId: '',
-    }
+      ackeeHost: "",
+      ackeeId: "",
+    },
   },
   vuetify: {
     vuetifyOptions: {
       blueprint: md3,
       labComponents: true,
       date: {
-        adapter: 'luxon',
+        adapter: "luxon",
       },
       theme: {
         defaultTheme: "dark",
@@ -49,34 +50,34 @@ export default defineNuxtConfig({
           },
         },
       },
-    }
+    },
   },
   image: {
-    format: ['avif', 'webp', 'jpg']
+    format: ["avif", "webp", "jpg"],
   },
   routeRules: {
     // '/': { swr: 300 },
-    '/admin/**': { index: false },
+    "/admin/**": { index: false },
   },
   robots: {
     rules: {
-      UserAgent: 'Googlebot',
-      Disallow: '/admin',
-      Sitemap: '/sitemap.xml'
-    }
+      UserAgent: "Googlebot",
+      Disallow: "/admin",
+      Sitemap: "/sitemap.xml",
+    },
   },
   // Fixes error when hotreloading (https://github.com/lovell/sharp/issues/3295)
   nitro: {
     hooks: {
-      'dev:reload': () => require('sharp')
-    }
+      "dev:reload": () => require("sharp"),
+    },
   },
   imports: {
     presets: [
       {
-        from: 'luxon',
-        imports: ['DateTime']
-      }
-    ]
-  }
-})
+        from: "luxon",
+        imports: ["DateTime"],
+      },
+    ],
+  },
+});

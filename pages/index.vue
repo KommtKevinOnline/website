@@ -9,7 +9,7 @@
     <v-container v-if="streamData.type === 'live'">
       <TwitchIsLive :streamData="streamData" />
     </v-container>
-    <v-container v-else-if="streamData.type === 'offline' && !!streamData.lastVod?.onlineIntendDate">
+    <v-container v-else-if="streamData.type === 'offline' && onlineInted">
       <TwitchOnlineIntend :vod="streamData.lastVod" />
     </v-container>
     <v-container v-else>
@@ -21,7 +21,12 @@
       <v-row justify="center">
         <v-col md="12" lg="8" class="d-flex align-center">
           <h1 class="gradient" style="font-size: 64px">Nein</h1>
-          <nuxt-img class="ml-4" :src="sevenTv.getEmoteUrl('609ef9394c18609a1d9b10e1')" height="64px" width="64px" />
+          <nuxt-img
+            class="ml-4"
+            :src="sevenTv.getEmoteUrl('609ef9394c18609a1d9b10e1')"
+            height="64px"
+            width="64px"
+          />
         </v-col>
       </v-row>
     </v-container>
@@ -52,7 +57,21 @@ useHead({
 
 const sevenTv = use7tv();
 
-const { data: streamData, pending } = await useFetch<Stream>('/api/twitch/stream/50985620')
+const { data: streamData, pending } = await useFetch<Stream>(
+  "/api/twitch/stream/50985620"
+);
+
+const onlineInted = computed(() => {
+  const lastVod = streamData.value?.lastVod;
+
+  if (!lastVod || !lastVod.onlineIntendDate || !lastVod.date) return false;
+
+  const onlineIntendDates = lastVod.onlineIntendDate
+    .split(",")
+    .map((dateString) => new Date(dateString));
+
+  return hasOnlineIntend(lastVod.date, onlineIntendDates);
+});
 </script>
 
 <style scoped>
