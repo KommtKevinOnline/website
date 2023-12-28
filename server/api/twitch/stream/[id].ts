@@ -1,9 +1,8 @@
-import { StreamsResponse } from "../../../interfaces/StreamsResponse.interface";
-import { Stream } from "../../../interfaces/Stream.interface";
-import { TokenResponse } from "../../../interfaces/TokenResponse.interface";
 import { db } from "../../../db";
 import { vods } from "../../../../db/schema";
 import { desc } from "drizzle-orm";
+import type { TokenResponse } from "../../../../interfaces/TokenResponse.interface";
+import type { StreamsResponse } from "../../../../interfaces/StreamsResponse.interface";
 
 async function getToken(): Promise<string> {
   const res = await fetch("https://id.twitch.tv/oauth2/token", {
@@ -40,14 +39,16 @@ export default defineEventHandler(async (event) => {
     }
   );
 
-  const data = (await res.json()) as StreamsResponse;
+  const streamRes = (await res.json()) as StreamsResponse | null;
 
   // If online: return twitch data
-  if (data.data.length !== 0) {
-    return data.data[0];
+  if (streamRes && streamRes.data && streamRes.data.length !== 0) {
+    return streamRes.data[0];
   } else {
     // If offline: look in db for most recent vod
-    const lastVod = await db.query.vods.findFirst({ orderBy: [desc(vods.date)] })
+    const lastVod = await db.query.vods.findFirst({
+      orderBy: [desc(vods.date)],
+    });
 
     return {
       type: "offline",

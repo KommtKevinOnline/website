@@ -56,7 +56,7 @@ export default defineNuxtConfig({
     format: ["avif", "webp", "jpg"],
   },
   routeRules: {
-    "/": { swr: 300 },
+    '/': { swr: 300 },
     "/admin/**": { index: false },
   },
   robots: {
@@ -73,6 +73,7 @@ export default defineNuxtConfig({
     },
   },
   imports: {
+    dirs: ["interfaces", "types"],
     presets: [
       {
         from: "luxon",

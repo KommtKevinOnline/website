@@ -92,7 +92,7 @@ const isLate = computed(() => {
   const now = new Date();
 
   for (const date of nextStreamingIntends.value) {
-    if (date.getTime() < now.getTime()) {
+    if (now > date) {
       isLate = true;
     }
   }

@@ -1,11 +1,6 @@
 <template>
   <v-card href="https://twitch.tv/papaplatte" color="purple-darken-2">
-    <v-img
-      :src="thumbnail"
-      height="300px"
-      aspect-ratio="16/9"
-      cover
-    />
+    <v-img :src="thumbnail" height="300px" aspect-ratio="16/9" cover />
 
     <v-card-title>
       {{ streamInfo.title }}
@@ -19,13 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import { Stream } from '../../server/interfaces/Stream.interface';
-
 const props = defineProps<{
-  streamInfo: Partial<Stream>
+  streamInfo: Partial<Stream>;
 }>();
 
 const thumbnail = computed(() => {
-  return props.streamInfo.thumbnail_url?.replace('{width}', '1920').replace('{height}', '1080');
+  return props.streamInfo.thumbnail_url
+    ?.replace("{width}", "1920")
+    .replace("{height}", "1080");
 });
 </script>

@@ -44,8 +44,6 @@
 </template>
 
 <script setup lang="ts">
-import { Stream } from "../server/interfaces/Stream.interface";
-
 useSeoMeta({
   title: "Kommt Kevin Online?",
   description: "Schaue hier nach ob Papaplatte heute streamt!",
@@ -68,7 +66,7 @@ const onlineInted = computed(() => {
 
   const onlineIntendDates = lastVod.onlineIntendDate
     .split(",")
-    .map((dateString) => new Date(dateString));
+    .map((dateString: string) => new Date(dateString));
 
   return hasOnlineIntend(lastVod.date, onlineIntendDates);
 });
