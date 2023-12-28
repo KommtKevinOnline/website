@@ -22,6 +22,9 @@ export default defineNuxtConfig({
   ],
   auth: {
     baseURL: process.env.AUTH_ORIGIN,
+    provider: {
+      type: "authjs",
+    },
   },
   runtimeConfig: {
     app: {
@@ -56,7 +59,7 @@ export default defineNuxtConfig({
     format: ["avif", "webp", "jpg"],
   },
   routeRules: {
-    '/': { swr: 300 },
+    "/": { swr: 300 },
     "/admin/**": { index: false },
   },
   robots: {

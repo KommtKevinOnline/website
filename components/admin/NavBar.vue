@@ -8,9 +8,7 @@
     ></v-app-bar-nav-icon>
     <v-row justify="center">
       <v-col class="d-flex align-center" cols="2">
-        <router-link to="/">
-          <nuxt-img src="/qp.svg" height="40" />
-        </router-link>
+        <router-link to="/" class="text-white"> KommtKevinOnline </router-link>
       </v-col>
       <v-col
         cols="12"
@@ -18,7 +16,13 @@
         class="d-flex align-center justify-end"
         v-if="mdAndUp"
       >
-        <v-btn to="/admin/alerts" color="white" class="ml-1" prepend-icon="mdi-bell">Alerts</v-btn>
+        <v-btn
+          to="/admin/alerts"
+          color="white"
+          class="ml-1"
+          prepend-icon="mdi-bell"
+          >Alerts</v-btn
+        >
       </v-col>
     </v-row>
     <template #append>
@@ -26,11 +30,20 @@
 
       <v-menu>
         <template #activator="{ props }">
-          <v-avatar class="ml-2" v-if="data?.user?.image" :image="data?.user?.image" v-bind="props"
-            style="cursor: pointer;" />
+          <v-avatar
+            class="ml-2"
+            v-if="data?.user?.image"
+            :image="data?.user?.image"
+            v-bind="props"
+            style="cursor: pointer"
+          />
         </template>
         <v-list>
-          <v-list-item append-icon="mdi-logout" title="Logout" @click="logOut" />
+          <v-list-item
+            append-icon="mdi-logout"
+            title="Logout"
+            @click="logOut"
+          />
         </v-list>
       </v-menu>
     </template>
@@ -38,17 +51,17 @@
 </template>
 
 <script lang="ts" setup>
-import { useDisplay } from 'vuetify'
+import { useDisplay } from "vuetify";
 
 const adminDrawer = useState<boolean>("admin-drawer");
 
-const router = useRouter()
+const router = useRouter();
 const { smAndDown, mdAndUp } = useDisplay();
-const { data, signOut } = useAuth()
+const { data, signOut } = useAuth();
 
 async function logOut() {
-  await signOut({ redirect: false })
-  router.push('/')
+  await signOut({ redirect: false });
+  router.push("/");
 }
 </script>
 

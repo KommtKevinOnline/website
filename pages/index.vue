@@ -68,7 +68,7 @@ const onlineInted = computed(() => {
     .split(",")
     .map((dateString: string) => new Date(dateString));
 
-  return hasOnlineIntend(lastVod.date, onlineIntendDates);
+  return hasOnlineIntend(new Date(lastVod.date), onlineIntendDates);
 });
 </script>
 
