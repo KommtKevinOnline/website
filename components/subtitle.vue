@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { Vod } from "../types/Vod";
+import type { Vod } from "../types/Vod";
 
 const TEXT_HEIGHT = 70;
 

@@ -1,4 +1,4 @@
-import { vods } from "../../db/schema";
+import { vods } from "../db/schema";
 
 export interface Stream {
   id: string;
@@ -7,7 +7,7 @@ export interface Stream {
   user_name: string;
   game_id: string;
   game_name: string;
-  type: 'live';
+  type: "live";
   title: string;
   viewer_count: number;
   started_at: string;

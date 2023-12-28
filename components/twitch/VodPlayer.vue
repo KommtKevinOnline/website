@@ -12,8 +12,6 @@
 </template>
 
 <script setup lang="ts">
-import { Vod } from "../../types/Vod";
-
 useHead({
   script: [
     {
