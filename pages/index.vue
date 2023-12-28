@@ -9,11 +9,7 @@
     <v-container v-if="streamData.type === 'live'">
       <TwitchIsLive :streamData="streamData" />
     </v-container>
-    <v-container
-      v-else-if="
-        streamData.type === 'offline' && !!streamData.lastVod?.onlineIntendDate
-      "
-    >
+    <v-container v-else-if="streamData.type === 'offline' && onlineInted">
       <TwitchOnlineIntend :vod="streamData.lastVod" />
     </v-container>
     <v-container v-else>
@@ -62,6 +58,18 @@ const sevenTv = use7tv();
 const { data: streamData, pending } = await useFetch<Stream>(
   "/api/twitch/stream/50985620"
 );
+
+const onlineInted = computed(() => {
+  const lastVod = streamData.value?.lastVod;
+
+  if (!lastVod || !lastVod.onlineIntendDate || !lastVod.date) return false;
+
+  const onlineIntendDates = lastVod.onlineIntendDate
+    .split(",")
+    .map((dateString: string) => new Date(dateString));
+
+  return hasOnlineIntend(lastVod.date, onlineIntendDates);
+});
 </script>
 
 <style scoped>

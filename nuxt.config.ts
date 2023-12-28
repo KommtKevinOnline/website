@@ -7,9 +7,6 @@ export default defineNuxtConfig({
     "@mdi/font/css/materialdesignicons.min.css",
     "typeface-roboto/index.css",
   ],
-  imports: {
-    dirs: ["interfaces", "types"],
-  },
   build: {
     transpile: ["vuetify"],
   },
@@ -21,6 +18,7 @@ export default defineNuxtConfig({
     "@nuxt/image",
     "@nuxtjs/robots",
     "nuxt-simple-sitemap",
+    "@nuxt/test-utils/module",
   ],
   auth: {
     baseURL: process.env.AUTH_ORIGIN,
@@ -58,7 +56,7 @@ export default defineNuxtConfig({
     format: ["avif", "webp", "jpg"],
   },
   routeRules: {
-    // '/': { swr: 300 },
+    '/': { swr: 300 },
     "/admin/**": { index: false },
   },
   robots: {
@@ -75,6 +73,7 @@ export default defineNuxtConfig({
     },
   },
   imports: {
+    dirs: ["interfaces", "types"],
     presets: [
       {
         from: "luxon",
