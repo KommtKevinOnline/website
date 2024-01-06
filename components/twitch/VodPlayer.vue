@@ -12,6 +12,8 @@
 </template>
 
 <script setup lang="ts">
+import type { vods } from "../../db/schema";
+
 useHead({
   script: [
     {
@@ -20,7 +22,7 @@ useHead({
   ],
 });
 
-const props = defineProps<{ vod: Vod }>();
+const props = defineProps<{ vod: typeof vods.$inferSelect }>();
 
 const currentTime = ref(0);
 const duration = ref(0);

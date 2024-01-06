@@ -17,14 +17,22 @@
 </template>
 
 <script setup lang="ts">
-import type { Vod } from "../types/Vod";
+import type { vods } from "../db/schema";
 
 const TEXT_HEIGHT = 70;
 
-const props = defineProps<{ vod: Vod; time: number }>();
+const props = defineProps<{ vod: typeof vods.$inferSelect; time: number }>();
 
 const segments = computed(() =>
-  props.vod.transcript.segments?.map((segment) => {
+  (props.vod.transcript as Transcript).segments?.map((segment) => {
+    if (!props.vod.duration) {
+      return {
+        ...segment,
+        start: 0,
+        end: 0,
+      };
+    }
+
     return {
       ...segment,
       start: segment.start + props.vod.duration,

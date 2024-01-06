@@ -65,7 +65,6 @@
       </v-card>
     </v-col>
   </v-row>
-  <twitch-vod-player v-if="vod" :vod="vod" />
 </template>
 
 <script setup lang="ts">

@@ -9,23 +9,31 @@
     <v-container v-if="streamData.type === 'live'">
       <TwitchIsLive :streamData="streamData" />
     </v-container>
-    <v-container v-else-if="streamData.type === 'offline' && onlineInted">
-      <TwitchOnlineIntend :vod="streamData.lastVod" />
-    </v-container>
-    <v-container v-else>
-      <v-row justify="center" dense>
-        <v-col md="12" lg="8">
-          <h2>Wird Kevin heute Online kommen?</h2>
-        </v-col>
-      </v-row>
-      <v-row justify="center">
-        <v-col md="12" lg="8" class="d-flex align-center">
-          <h1 class="gradient" style="font-size: 64px">Nein</h1>
-          <nuxt-img
-            class="ml-4"
-            :src="sevenTv.getEmoteUrl('609ef9394c18609a1d9b10e1')"
-            height="64px"
-            width="64px"
+    <v-container v-else-if="streamData.type === 'offline'">
+      <TwitchOnlineIntend v-if="onlineInted" :vod="streamData.lastVod" />
+      <template v-else>
+        <v-row justify="center" dense>
+          <v-col md="12" lg="8">
+            <h2>Wird Kevin heute Online kommen?</h2>
+          </v-col>
+        </v-row>
+        <v-row justify="center">
+          <v-col md="12" lg="8" class="d-flex align-center">
+            <h1 class="gradient" style="font-size: 64px">Nein</h1>
+            <nuxt-img
+              class="ml-4"
+              :src="sevenTv.getEmoteUrl('609ef9394c18609a1d9b10e1')"
+              height="64px"
+              width="64px"
+            />
+          </v-col>
+        </v-row>
+      </template>
+      <v-row>
+        <v-col>
+          <twitch-vod-player
+            v-if="streamData.lastVod"
+            :vod="streamData.lastVod"
           />
         </v-col>
       </v-row>
