@@ -13,14 +13,28 @@
         class="d-flex align-center justify-center"
         v-if="mdAndUp"
       >
-        <v-btn to="/" color="white">Home</v-btn>
-        <v-btn to="/thumbnail/generate" color="white" class="ml-1"
+        <v-btn to="/" color="white" prepend-icon="mdi-home">Home</v-btn>
+        <v-btn
+          to="/thumbnail/generate"
+          color="white"
+          class="ml-1"
+          prepend-icon="mdi-cog-clockwise"
           >Thumbnail Generator</v-btn
         >
-        <v-btn to="/how-does-it-work" color="white" class="ml-1"
+        <v-btn
+          to="/how-does-it-work"
+          color="white"
+          class="ml-1"
+          prepend-icon="mdi-help-circle"
           >Wie funktioniert das?</v-btn
         >
-        <v-btn to="/about" color="white" class="ml-1">Über</v-btn>
+        <v-btn
+          to="/about"
+          color="white"
+          class="ml-1"
+          prepend-icon="mdi-information"
+          >Über</v-btn
+        >
       </v-col>
     </v-row>
   </v-app-bar>
