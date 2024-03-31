@@ -30,10 +30,6 @@ export default defineNuxtConfig({
     app: {
       postgresUrl: "",
     },
-    public: {
-      ackeeHost: "",
-      ackeeId: "",
-    },
   },
   vuetify: {
     vuetifyOptions: {
