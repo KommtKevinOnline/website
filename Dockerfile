@@ -1,27 +1,22 @@
-FROM node:lts-slim as base
+FROM node:lts-slim AS build
 
-# Install PNPM
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+RUN apt-get update && apt-get install -y curl unzip
+
+RUN curl -fsSL https://bun.sh/install | bash
 
 ARG PORT=3000
 
 WORKDIR /src
 
-# Build
-FROM base as build
-
-COPY --link package.json pnpm-lock.yaml ./
-RUN pnpm install
+COPY package.json bun.lockb ./
+RUN ~/.bun/bin/bun install
 
 COPY --link . .
 
-RUN pnpm build
-RUN pnpm prune
+RUN ~/.bun/bin/bun run build
 
 # Run
-FROM base
+FROM node:lts-slim
 
 ENV PORT=$PORT
 
