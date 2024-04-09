@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     "@nuxt/test-utils/module",
   ],
   auth: {
-    baseURL: process.env.AUTH_ORIGIN,
+    baseURL: import.meta.env.AUTH_ORIGIN,
     provider: {
       type: "authjs",
     },
