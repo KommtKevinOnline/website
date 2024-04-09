@@ -23,4 +23,6 @@ ENV PORT=$PORT
 COPY --from=build /src/.output /src/.output
 COPY --from=build /src/node_modules /src/node_modules
 
+WORKDIR /src
+
 CMD [ "node", ".output/server/index.mjs" ]
