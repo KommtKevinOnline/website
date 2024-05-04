@@ -1,19 +1,17 @@
 FROM node:lts-slim AS build
 
-RUN apt-get update && apt-get install -y curl unzip
-
-RUN curl -fsSL https://bun.sh/install | bash
+RUN corepack enable
 
 ARG PORT=3000
 
 WORKDIR /src
 
-COPY package.json bun.lockb ./
-RUN ~/.bun/bin/bun install
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install
 
 COPY --link . .
 
-RUN ~/.bun/bin/bun run build
+RUN pnpm run build
 
 # Run
 FROM node:lts-slim
