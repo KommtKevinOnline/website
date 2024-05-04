@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     "@nuxt/test-utils/module",
     "@nuxt/ui",
     "nuxt-og-image",
+    "@nuxt/fonts"
   ],
   auth: {
     baseURL: process.env.AUTH_ORIGIN,
