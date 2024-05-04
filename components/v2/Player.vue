@@ -7,6 +7,11 @@
         <div id="player" class="w-full aspect-video"></div>
         <v2-subtitle :vod="vod" :time="currentTime" />
       </div>
+      <div class="mt-2 flex justify-center md:hidden">
+        <UButton color="primary" size="xl" @click="toggleMute">
+          <UIcon :name="icon" />
+        </UButton>
+      </div>
     </div>
   </div>
 </template>
@@ -26,6 +31,22 @@ const props = defineProps<{ vod: typeof vods.$inferSelect }>();
 
 const currentTime = ref(0);
 
+const player = ref<any>(null);
+
+const icon = ref("i-heroicons-speaker-x-mark-20-solid");
+
+function toggleMute() {
+  if (!player.value) return;
+
+  if (player.value.getMuted()) {
+    player.value.setMuted(false);
+    icon.value = "i-heroicons-speaker-wave-20-solid";
+  } else {
+    player.value.setMuted(true);
+    icon.value = "i-heroicons-speaker-x-mark-20-solid";
+  }
+}
+
 onMounted(() => {
   const options = {
     width: "100%",
@@ -37,12 +58,12 @@ onMounted(() => {
     time: props.vod.duration,
   };
   // @ts-ignore
-  const player = new Twitch.Player("player", options);
+  player.value = new Twitch.Player("player", options);
 
   // @ts-ignore
-  player.addEventListener(Twitch.Player.READY, () => {
+  player.value.addEventListener(Twitch.Player.READY, () => {
     setInterval(() => {
-      currentTime.value = player.getCurrentTime();
+      currentTime.value = player.value.getCurrentTime();
     }, 400);
   });
 });

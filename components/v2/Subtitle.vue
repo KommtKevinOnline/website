@@ -1,9 +1,9 @@
 <template>
   <div
     v-if="currentSegment"
-    class="absolute h-12 max-w-max self-end justify-self-center bottom-20 bg-emerald-200 rounded-lg p-2 text-emerald-950"
+    class="absolute h-9 md:h-12 max-w-max top-2 md:self-end md:bottom-20 justify-self-center bg-emerald-200 rounded-lg p-2 text-emerald-950"
   >
-    <p class="text-lg font-bold">
+    <p class="text-sm md:text-lg font-bold overflow-hidden text-ellipsis">
       {{ currentSegment.text }}
     </p>
   </div>

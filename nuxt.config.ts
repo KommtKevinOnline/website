@@ -2,6 +2,9 @@ import { md3 } from "vuetify/blueprints";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  devtools: {
+    enabled: true,
+  },
   css: [
     "@mdi/font/css/materialdesignicons.min.css",
     "typeface-roboto/index.css",
@@ -16,6 +19,7 @@ export default defineNuxtConfig({
     "nuxt-simple-sitemap",
     "@nuxt/test-utils/module",
     "@nuxt/ui",
+    "nuxt-og-image",
   ],
   auth: {
     baseURL: process.env.AUTH_ORIGIN,
@@ -56,5 +60,8 @@ export default defineNuxtConfig({
         imports: ["DateTime"],
       },
     ],
+  },
+  site: {
+    url: "https://kommtkevinonline.de",
   },
 });

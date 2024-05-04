@@ -27,8 +27,8 @@ const links = [
         to: "/about",
       },
       {
-        label: "Niki2k1.de",
-        href: "https://niki2k1.de",
+        label: "Niki2k1.dev",
+        href: "https://niki2k1.dev",
         target: "_blank",
       },
     ],
