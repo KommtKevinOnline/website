@@ -22,3 +22,9 @@ useHead({
   },
 });
 </script>
+
+<style>
+:root {
+  font-family: Roboto;
+}
+</style>
