@@ -3,7 +3,7 @@
     <div class="flex flex-col items-center p-24">
       <img src="../../assets/KommtKevinOnline.svg" />
       <div class="mt-14"></div>
-      <h2 class="my-0 text-9xl font-extrabold text-[#333333]">
+      <h2 class="my-0 text-[12rem] font-extrabold text-[#333333]">
         {{ onlineIntend ? "JA" : "NEIN" }}
       </h2>
       <p class="text-4xl font-bold text-[#9b9b9b]">{{ date }}</p>
