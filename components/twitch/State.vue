@@ -8,7 +8,9 @@
 
     <v-card-text class="text-grey-lighten-1 d-flex justify-space-between">
       <b class="text-left">{{ streamInfo.game_name }}</b>
-      <span class="text-right">{{ streamInfo.viewer_count }} Zuschauer</span>
+      <span class="text-right"
+        >{{ streamInfo.viewer_count?.toLocaleString("de-DE") }} Zuschauer</span
+      >
     </v-card-text>
   </v-card>
 </template>

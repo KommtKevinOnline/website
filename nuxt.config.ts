@@ -1,24 +1,19 @@
-import { md3 } from "vuetify/blueprints";
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  css: [
-    "vuetify/lib/styles/main.sass",
-    "@mdi/font/css/materialdesignicons.min.css",
-    "typeface-roboto/index.css",
-  ],
-  build: {
-    transpile: ["vuetify"],
+  devtools: {
+    enabled: true,
   },
+  extends: ["@nuxt/ui-pro"],
   modules: [
-    "vuetify-nuxt-module",
     "@nuxt/content",
     "@vueuse/nuxt",
     "@sidebase/nuxt-auth",
     "@nuxt/image",
     "@nuxtjs/robots",
-    "nuxt-simple-sitemap",
+    "@nuxtjs/sitemap",
     "@nuxt/test-utils/module",
+    "@nuxt/ui",
+    "nuxt-og-image",
   ],
   auth: {
     baseURL: process.env.AUTH_ORIGIN,
@@ -29,26 +24,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     app: {
       postgresUrl: "",
-    },
-  },
-  vuetify: {
-    vuetifyOptions: {
-      blueprint: md3,
-      labComponents: true,
-      date: {
-        adapter: "luxon",
-      },
-      theme: {
-        defaultTheme: "dark",
-        themes: {
-          dark: {
-            colors: {
-              primary: "#3b3b3b",
-              background: "#131414",
-            },
-          },
-        },
-      },
     },
   },
   image: {
@@ -79,5 +54,14 @@ export default defineNuxtConfig({
         imports: ["DateTime"],
       },
     ],
+  },
+  ui: {
+    icons: ["heroicons", "simple-icons", "mdi"],
+  },
+  site: {
+    url: "https://kommtkevinonline.de",
+  },
+  sitemap: {
+    include: ["/", "/faq"],
   },
 });

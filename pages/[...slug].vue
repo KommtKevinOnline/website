@@ -1,7 +1,9 @@
 <template>
-  <v-row justify="center">
-    <v-col cols="12" lg="8">
-      <ContentDoc />
-    </v-col>
-  </v-row>
+  <div class="mt-8">
+    <UContainer>
+      <UPage class="text-gray-700 prose">
+        <ContentDoc />
+      </UPage>
+    </UContainer>
+  </div>
 </template>
