@@ -1,14 +1,8 @@
-import { md3 } from "vuetify/blueprints";
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: {
     enabled: true,
   },
-  css: [
-    "@mdi/font/css/materialdesignicons.min.css",
-    "typeface-roboto/index.css",
-  ],
   extends: ["@nuxt/ui-pro"],
   modules: [
     "@nuxt/content",
@@ -16,7 +10,7 @@ export default defineNuxtConfig({
     "@sidebase/nuxt-auth",
     "@nuxt/image",
     "@nuxtjs/robots",
-    "nuxt-simple-sitemap",
+    "@nuxtjs/sitemap",
     "@nuxt/test-utils/module",
     "@nuxt/ui",
     "nuxt-og-image",
@@ -61,7 +55,13 @@ export default defineNuxtConfig({
       },
     ],
   },
+  ui: {
+    icons: ["heroicons", "simple-icons", "mdi"],
+  },
   site: {
     url: "https://kommtkevinonline.de",
+  },
+  sitemap: {
+    include: ["/", "/faq"],
   },
 });

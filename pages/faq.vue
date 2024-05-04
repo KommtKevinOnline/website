@@ -1,9 +1,18 @@
 <template>
   <div>
-    <ULandingSection
-      title="FAQ"
-      description="Fragen oder Anmerkungen zu dem Projekt?"
-    >
+    <ULandingSection title="FAQ">
+      <template #description>
+        <p>Fragen oder Anmerkungen zu dem Projekt?</p>
+        <UButton
+          class="mt-4"
+          size="xs"
+          icon="i-simple-icons-github"
+          to="https://github.com/KommtKevinOnline/website/issues/new"
+          target="_blank"
+        >
+          Issue erstellen
+        </UButton>
+      </template>
       <ULandingFAQ class="max-w-4xl mx-auto" :items="faqItems" multiple />
     </ULandingSection>
   </div>

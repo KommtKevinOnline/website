@@ -11,17 +11,19 @@
 </template>
 
 <script setup lang="ts">
-const links = computed(() => [
+import type { HeaderLink } from "@nuxt/ui-pro/types";
+
+const links = computed<HeaderLink[]>(() => [
   {
     label: "Home",
-    to: "/v2",
+    to: "/",
     icon: "i-heroicons-home-20-solid",
   },
-  {
-    label: "Thumbnail Generator",
-    to: "/thumbnail/generate",
-    icon: "i-heroicons-photo",
-  },
+  // {
+  //   label: "Thumbnail Generator",
+  //   to: "/thumbnail/generate",
+  //   icon: "i-heroicons-photo",
+  // },
   {
     label: "Games",
     to: "https://games.kommtkevinonline.de",
@@ -29,7 +31,7 @@ const links = computed(() => [
   },
   {
     label: "FAQ",
-    to: "/v2/faq",
+    to: "/faq",
     icon: "i-heroicons-question-mark-circle-20-solid",
   },
 ]);

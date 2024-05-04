@@ -12,6 +12,15 @@
     </template>
 
     <template #right>
+      <UButton
+        to="https://github.com/KommtKevinOnline"
+        target="_blank"
+        icon="i-simple-icons-github"
+        aria-label="GitHub"
+        color="gray"
+        variant="ghost"
+      />
+
       <UColorModeButton size="sm" />
     </template>
   </UFooter>
@@ -23,13 +32,13 @@ const links = [
     label: "Info",
     children: [
       {
-        label: "Über mich",
-        to: "/about",
+        label: "Niki2k1.dev",
+        to: "https://niki2k1.dev",
+        target: "_blank",
       },
       {
-        label: "Niki2k1.dev",
-        href: "https://niki2k1.dev",
-        target: "_blank",
+        label: "FAQ",
+        to: "/faq",
       },
     ],
   },
@@ -40,9 +49,18 @@ const links = [
         label: "Impressum",
         to: "/impressum",
       },
+    ],
+  },
+  {
+    label: "Mehr von mir",
+    children: [
       {
-        label: "Kontakt",
-        to: "/contact",
+        label: "Games",
+        to: "https://games.kommtkevinonline.de",
+      },
+      {
+        label: "Papaplattify",
+        to: "https://chromewebstore.google.com/detail/youtube-papaplattify/nodlbljncllmcgidfnihmpbkladalhld?hl=de",
       },
     ],
   },
