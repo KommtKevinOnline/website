@@ -8,7 +8,8 @@
           <admin-alert-modal ref="modal" :refresh="refresh" class="ml-auto" />
         </v-card-title>
         <v-card-text>
-          <v-data-table :items="alerts || []" :headers="headers" v-if="lgAndUp">
+          <v-data-table :items="alerts || []" :headers="headers">
+            <!-- v-if="lgAndUp" -->
             <template v-slot:item.active="{ item }">
               <v-checkbox-btn v-model="item.active" disabled></v-checkbox-btn>
             </template>
@@ -28,7 +29,7 @@
               />
             </template>
           </v-data-table>
-          <v-row v-else>
+          <!-- <v-row v-else>
             <v-col cols="12" v-for="alert in alerts">
               <v-card
                 :title="alert.title"
@@ -52,7 +53,7 @@
                 </v-card-actions>
               </v-card>
             </v-col>
-          </v-row>
+          </v-row> -->
         </v-card-text>
       </v-card>
     </v-col>
@@ -60,12 +61,10 @@
 </template>
 
 <script setup lang="ts">
-import { useDisplay } from "vuetify/lib/framework.mjs";
-
 definePageMeta({ layout: "admin", middleware: "auth" });
 useSeoMeta({ title: "Admin - Alerts" });
 
-const { lgAndUp } = useDisplay();
+// const { lgAndUp } = useDisplay();
 
 const headers = ref([
   { title: "Title", key: "title" },

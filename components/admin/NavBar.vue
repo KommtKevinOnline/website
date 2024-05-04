@@ -1,7 +1,7 @@
 <template>
   <v-app-bar class="gradient" :elevation="0" color="#1e1e1e">
+    <!-- v-if="smAndDown" -->
     <v-app-bar-nav-icon
-      v-if="smAndDown"
       color="white"
       variant="text"
       @click.stop="adminDrawer = !adminDrawer"
@@ -10,12 +10,8 @@
       <v-col class="d-flex align-center" cols="2">
         <router-link to="/" class="text-white"> KommtKevinOnline </router-link>
       </v-col>
-      <v-col
-        cols="12"
-        md="6"
-        class="d-flex align-center justify-end"
-        v-if="mdAndUp"
-      >
+      <!-- v-if="mdAndUp" -->
+      <v-col cols="12" md="6" class="d-flex align-center justify-end">
         <v-btn
           to="/admin/alerts"
           color="white"
@@ -51,12 +47,10 @@
 </template>
 
 <script lang="ts" setup>
-import { useDisplay } from "vuetify";
-
 const adminDrawer = useState<boolean>("admin-drawer");
 
 const router = useRouter();
-const { smAndDown, mdAndUp } = useDisplay();
+// const { smAndDown, mdAndUp } = useDisplay();
 const { data, signOut } = useAuth();
 
 async function logOut() {
