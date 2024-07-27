@@ -1,6 +1,6 @@
 # Impressum
 
-Angaben gemäß § 5 TMG  
+Angaben gemäß § 5 Digitale-Dienste-Gesetz (DDG)
 <br/>
 Niklas Lausch  
 Hauptstr. 50  
