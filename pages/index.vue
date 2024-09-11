@@ -20,6 +20,8 @@
 </template>
 
 <script lang="ts" setup>
+import { DateTime } from "luxon";
+
 useSeoMeta({
   title: "KommtKevinOnline?",
 });
@@ -57,10 +59,12 @@ const onlineIntendTime = computed(() => {
     .split(",")
     .map((dateString: string) => new Date(dateString));
 
-  return onlineIntendDates[0].toLocaleTimeString("de-DE", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  const timeString = DateTime.fromJSDate(onlineIntendDates[0])
+    .setZone("UTC")
+    .setLocale("de")
+    .toLocaleString(DateTime.TIME_24_SIMPLE);
+
+  return timeString;
 });
 
 defineOgImageComponent("KommtKevinOnline", {
