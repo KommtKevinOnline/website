@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
     orderBy: [desc(vods.date)],
   });
 
-  if (!lastVod || !lastVod.onlineIntendDate || !lastVod.date) return false;
+  if (!lastVod || !lastVod.onlineIntendDate || !lastVod.date) return `4Shrug`;
 
   const onlineIntendDates = lastVod.onlineIntendDate
     .split(",")
