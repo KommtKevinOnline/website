@@ -7,21 +7,14 @@ export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
     "@vueuse/nuxt",
-    "@sidebase/nuxt-auth",
     "@nuxt/image",
     "@nuxtjs/robots",
     "@nuxtjs/sitemap",
     "@nuxt/test-utils/module",
     "@nuxt/ui",
     "nuxt-og-image",
-    "@nuxt/fonts"
+    "@nuxt/fonts",
   ],
-  auth: {
-    baseURL: process.env.AUTH_ORIGIN,
-    provider: {
-      type: "authjs",
-    },
-  },
   runtimeConfig: {
     app: {
       postgresUrl: "",
