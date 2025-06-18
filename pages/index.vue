@@ -68,6 +68,6 @@ const onlineIntendTime = computed(() => {
 });
 
 defineOgImageComponent("KommtKevinOnline", {
-  onlineInted: onlineInted.value,
+  onlineInted: () => onlineInted.value,
 });
 </script>
