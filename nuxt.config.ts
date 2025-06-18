@@ -55,4 +55,7 @@ export default defineNuxtConfig({
   sitemap: {
     include: ["/", "/faq"],
   },
+  experimental: {
+    renderJsonPayloads: false,
+  },
 });
