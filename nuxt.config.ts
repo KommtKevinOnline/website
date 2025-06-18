@@ -28,11 +28,8 @@ export default defineNuxtConfig({
     "/admin/**": { index: false },
   },
   robots: {
-    rules: {
-      UserAgent: "Googlebot",
-      Disallow: "/admin",
-      Sitemap: "/sitemap.xml",
-    },
+    disallow: "/admin",
+    sitemap: "/sitemap.xml",
   },
   // Fixes error when hotreloading (https://github.com/lovell/sharp/issues/3295)
   nitro: {
