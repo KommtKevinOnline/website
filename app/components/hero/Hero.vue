@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="p-4 md:p-6 flex flex-col gap-2">
     <div class="grid">
-      <div class="col-1 row-1 p-4">
+      <div class="col-1 row-1">
         <div
           class="h-[400px] md:h-[512px] w-full relative overflow-hidden rounded-2xl"
         >
@@ -12,6 +12,7 @@
             :noise-intensity="1.2"
             :rotation="1.2"
             class="rounded-2xl h-96"
+            background-color="white"
           />
         </div>
       </div>
@@ -27,15 +28,13 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="flex justify-center">
-    <h3 class="text-xs md:text-sm text-muted text-center mx-4">
-      <b class="-ml-1.5">*</b>
-      Die Infos werden von einer KI aus dem Stream analysiert, es kann dabei zu
-      Fehlern kommen.
-      <br />
-      Es gibt keine Garantie für die Genauigkeit der Infos.
-    </h3>
+    <div class="flex justify-center">
+      <h3 class="text-xs md:text-sm text-muted text-center mx-4">
+        <b class="-ml-1.5">*</b>
+        Die Infos werden von einer KI aus dem Stream analysiert, es kann dabei
+        zu Fehlern kommen. Es gibt keine Garantie für die Genauigkeit der Infos.
+      </h3>
+    </div>
   </div>
 </template>
 
