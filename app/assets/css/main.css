@@ -1,0 +1,8 @@
+@import 'tailwindcss';
+@import '@nuxt/ui-pro';
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: 'DM Sans', sans-serif;
+}

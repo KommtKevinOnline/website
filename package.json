@@ -10,13 +10,23 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/fonts": "0.11.1",
-    "@nuxt/icon": "1.12.0",
-    "@nuxt/ui": "3.0.2",
-    "nuxt": "^3.16.2",
-    "typescript": "^5.6.3",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "@nuxt/fonts": "0.11.4",
+    "@nuxt/icon": "2.0.0",
+    "@nuxt/ui-pro": "^3.3.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "nuxt": "^4.0.3",
+    "ogl": "^1.0.11",
+    "typescript": "^5.9.2",
+    "vite": "npm:rolldown-vite@latest",
+    "vue": "^3.5.18",
+    "vue-router": "^4.5.1"
   },
-  "packageManager": "pnpm@9.15.5+sha512.845196026aab1cc3f098a0474b64dfbab2afe7a1b4e91dd86895d8e4aa32a7a6d03049e2d0ad770bbe4de023a7122fb68c1a1d6e0d033c7076085f9d5d4800d4"
+  "packageManager": "pnpm@10.14.0",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "esbuild",
+      "vue-demi"
+    ]
+  }
 }
