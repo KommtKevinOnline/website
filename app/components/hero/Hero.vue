@@ -20,6 +20,9 @@
         <div class="flex flex-col items-center justify-center h-full">
           <h1
             class="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-black italic text-white drop-shadow-2xl"
+            :class="{
+              'lg:text-7xl!': props.isOnline,
+            }"
           >
             <template v-if="props.isOnline">Kevin ist online!</template>
             <template v-else-if="props.prediction?.eventType === 'live'">
