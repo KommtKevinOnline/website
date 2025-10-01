@@ -9,7 +9,64 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  modules: ['@nuxt/fonts', '@nuxt/icon', '@nuxt/ui-pro'],
+  modules: [
+    '@nuxt/fonts',
+    '@nuxt/icon',
+    '@nuxt/ui',
+    '@nuxt/image',
+    '@vueuse/nuxt',
+    'nuxt-charts',
+  ],
+
+  runtimeConfig: {
+    database: {
+      url: undefined,
+    },
+  },
+
+  nitro: {
+    experimental: {
+      tasks: true,
+    },
+    imports: {
+      dirs: ['server/utils'],
+      presets: [
+        {
+          from: 'zod',
+          imports: ['z'],
+        },
+        {
+          from: 'h3-zod',
+          imports: [
+            'useValidatedQuery',
+            'useValidatedBody',
+            'useValidatedParams',
+          ],
+        },
+      ],
+    },
+  },
+
+  image: {
+    domains: ['static-cdn.jtvnw.net'],
+    ipx: {
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+    },
+  },
+
+  ui: {
+    theme: {
+      colors: [
+        'primary',
+        'secondary',
+        'success',
+        'info',
+        'warning',
+        'error',
+        'purple',
+      ],
+    },
+  },
 
   fonts: {
     families: [

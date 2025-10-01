@@ -1,5 +1,7 @@
 <template>
   <UApp>
+    <AppAlert />
+
     <AppHeader />
 
     <UMain>

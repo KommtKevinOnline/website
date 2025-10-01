@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FooterColumn } from '@nuxt/ui-pro';
+import type { FooterColumn } from '@nuxt/ui';
 
 const columns: FooterColumn[] = [
   {
@@ -69,7 +69,7 @@ const columns: FooterColumn[] = [
       },
       {
         label: 'FAQ',
-        to: '/faq',
+        to: '#faq',
       },
     ],
   },
@@ -78,12 +78,12 @@ const columns: FooterColumn[] = [
     children: [
       {
         label: 'Impressum',
-        to: '/impressum',
+        to: 'https://niki2k1.dev/impressum',
       },
     ],
   },
   {
-    label: 'Mehr von mir',
+    label: 'Mehr Tools',
     children: [
       {
         label: 'Games',

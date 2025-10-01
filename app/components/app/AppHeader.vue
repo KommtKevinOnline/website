@@ -2,22 +2,11 @@
   <UHeader>
     <template #left>
       <NuxtLink to="/">
-        <AppLogo class="h-8" />
+        <AppLogo class="h-8 w-12" />
       </NuxtLink>
     </template>
 
     <UNavigationMenu :items="items" />
-
-    <template #right>
-      <UButton
-        to="https://github.com/nuxt-ui-pro/starter"
-        target="_blank"
-        icon="i-simple-icons-github"
-        aria-label="GitHub"
-        color="neutral"
-        variant="ghost"
-      />
-    </template>
   </UHeader>
 </template>
 
@@ -39,7 +28,7 @@ const items = computed<NavigationMenuItem[]>(() => [
   },
   {
     label: 'FAQ',
-    to: '/faq',
+    to: '#faq',
     icon: 'i-lucide-circle-help',
   },
 ]);
