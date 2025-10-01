@@ -1,19 +1,9 @@
 <template>
-  <UPageSection title="Historie">
-    <template #description>
-      <UChip
-        text="Bald verfügbar!"
-        size="3xl"
-        :ui="{ base: 'p-2' }"
-        color="error"
-      >
-        <p>
-          Stream Historie, klicke auf einen Titel um mehr Infos zu dem Stream zu
-          erhalten.
-        </p>
-      </UChip>
-    </template>
-
+  <UPageSection
+    title="Historie"
+    description="Stream Historie, klicke auf einen Titel um mehr Infos zu dem Stream zu
+          erhalten. (Bald verfügbar!)"
+  >
     <div v-if="vods" class="flex justify-center">
       <UTimeline color="neutral" :items="items" class="w-96">
         <template #title="{ item }">
