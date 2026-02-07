@@ -32,7 +32,7 @@
               <template v-else-if="props.prediction?.eventType === 'offday'">
                 Nein
               </template>
-              <template v-else>Keine Daten vorhanden</template>
+              <div v-else class="text-center lg:text-7xl">Keine Daten vorhanden</div>
             </h1>
             <h2
               class="text-3xl lg:text-4xl text-center italic text-neutral-200 drop-shadow-2xl"
