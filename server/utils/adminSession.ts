@@ -9,8 +9,9 @@ export interface EditorUser {
 }
 
 function ownerIds(): string[] {
-  return useRuntimeConfig()
-    .adminTwitchIds.split(',')
+  // env values are destr-parsed: a single numeric id arrives as a number
+  return String(useRuntimeConfig().adminTwitchIds ?? '')
+    .split(',')
     .map((id: string) => id.trim())
     .filter(Boolean);
 }
