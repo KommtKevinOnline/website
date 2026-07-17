@@ -15,7 +15,6 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/image',
     '@vueuse/nuxt',
-    'nuxt-charts',
     'nuxt-auth-utils',
     'nuxt-og-image',
   ],

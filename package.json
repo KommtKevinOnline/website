@@ -10,33 +10,30 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.68",
-    "@nuxt/fonts": "0.11.4",
-    "@nuxt/icon": "2.0.0",
+    "@iconify-json/lucide": "^1.2.117",
+    "@nuxt/fonts": "0.14.0",
+    "@nuxt/icon": "2.3.1",
     "@nuxt/image": "^1.11.0",
-    "@nuxt/ui": "^4.0.0",
+    "@nuxt/ui": "^4.9.0",
     "@resvg/resvg-js": "^2.6.2",
-    "@tailwindcss/typography": "^0.5.19",
-    "@types/luxon": "^3.7.1",
-    "@unovis/vue": "^1.6.1",
+    "@tailwindcss/typography": "^0.5.20",
+    "@types/luxon": "^3.7.2",
     "@vueuse/nuxt": "13.9.0",
-    "date-fns": "^4.1.0",
-    "dotenv": "^17.2.3",
-    "drizzle-orm": "^0.44.5",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^0.45.2",
     "h3-zod": "^0.5.3",
     "luxon": "^3.7.2",
-    "nuxt": "^4.1.2",
+    "nuxt": "^4.4.8",
     "nuxt-auth-utils": "^0.5.29",
-    "nuxt-charts": "0.2.4",
     "nuxt-og-image": "^6.7.2",
     "ogl": "^1.0.11",
-    "pg": "^8.16.3",
+    "pg": "^8.22.0",
     "satori": "^0.28.0",
     "typescript": "^5.9.3",
     "vite": "npm:rolldown-vite@latest",
-    "vue": "^3.5.22",
+    "vue": "^3.5.39",
     "vue-router": "^4.5.1",
-    "zod": "^4.1.11"
+    "zod": "^4.4.3"
   },
   "packageManager": "pnpm@10.17.1",
   "pnpm": {
@@ -52,8 +49,8 @@
     }
   },
   "devDependencies": {
-    "@types/pg": "^8.15.5",
-    "drizzle-kit": "^0.31.5",
-    "tsx": "^4.20.6"
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^0.31.10",
+    "tsx": "^4.23.1"
   }
 }
