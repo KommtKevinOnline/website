@@ -38,6 +38,26 @@ export default defineCachedEventHandler(
       }
     }
 
+    // The streams table only fills from stream.online events going forward;
+    // archive VODs carry the actual broadcast start, so they backfill days
+    // recorded before that (and days where an event was missed).
+    const vods = await drizzle.query.vods.findMany({
+      columns: { date: true },
+      orderBy: (vods, { asc }) => asc(vods.date),
+    });
+
+    let vodDays = 0;
+    for (const vod of vods) {
+      if (!vod.date) continue;
+
+      const day = parseDbDate(vod.date).setZone('Europe/Berlin').toISODate()!;
+
+      if (!streamsByDay.has(day)) {
+        streamsByDay.set(day, vod.date);
+        vodDays++;
+      }
+    }
+
     const comparisons: DayComparison[] = livePredictions
       .filter((prediction) => prediction.date)
       .map((prediction) => {
@@ -73,7 +93,7 @@ export default defineCachedEventHandler(
     const onTimeCount = delays.filter((d) => Math.abs(d) <= 15).length;
 
     return {
-      totalStreams: streams.length,
+      totalStreams: streams.length + vodDays,
       totalLivePredictions: comparisons.length,
       matchedPredictions: matched.length,
       hitRate: comparisons.length
