@@ -1,12 +1,7 @@
-export default defineEventHandler(async (event) => {
-  const { limit } = getQuery(event);
-
+export default defineEventHandler(async () => {
   const drizzle = useDrizzle();
 
-  const today = new Date().toISOString().split('T')[0];
-
-  const vods = await drizzle.query.vods.findFirst({
-    where: lt(tables.predictions.date, today),
+  const vod = await drizzle.query.vods.findFirst({
     columns: {
       vodid: true,
       title: true,
@@ -15,8 +10,8 @@ export default defineEventHandler(async (event) => {
       date: true,
       duration: true,
     },
-    orderBy: [desc(tables.predictions.date)],
+    orderBy: [desc(tables.vods.date)],
   });
 
-  return vods;
+  return vod;
 });

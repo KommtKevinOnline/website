@@ -1,12 +1,11 @@
 export default defineEventHandler(async (event) => {
-  const { limit } = getQuery(event);
+  const { limit } = await useValidatedQuery(event, {
+    limit: z.coerce.number().int().min(1).max(20).default(3),
+  });
 
   const drizzle = useDrizzle();
 
-  const today = new Date().toISOString().split('T')[0];
-
   const vods = await drizzle.query.vods.findMany({
-    where: lt(tables.predictions.date, today),
     columns: {
       vodid: true,
       title: true,
@@ -14,8 +13,8 @@ export default defineEventHandler(async (event) => {
       viewCount: true,
       date: true,
     },
-    orderBy: [desc(tables.predictions.date)],
-    limit: 3,
+    orderBy: [desc(tables.vods.date)],
+    limit,
   });
 
   return vods;

@@ -7,6 +7,8 @@ import {
   timestamp,
   bigint,
   serial,
+  date,
+  real,
 } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 
@@ -37,8 +39,37 @@ export const predictions = pgTable('predictions', {
   type: varchar(),
   source: varchar(),
   date: timestamp({ withTimezone: true, mode: 'string' }),
+  day: date(),
   topic: text(),
   eventType: varchar('event_type'),
+  confidence: real(),
+  quote: text().default(''),
+  quoteStart: real('quote_start'),
+  createdAt: timestamp('created_at', { mode: 'string' })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+});
+
+export const streams = pgTable('streams', {
+  id: varchar().primaryKey().notNull(),
+  startedAt: timestamp('started_at', {
+    withTimezone: true,
+    mode: 'string',
+  }).notNull(),
+  endedAt: timestamp('ended_at', { withTimezone: true, mode: 'string' }),
+  title: text().default(''),
+  category: text().default(''),
+  createdAt: timestamp('created_at', { mode: 'string' })
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+});
+
+export const editors = pgTable('editors', {
+  twitchUserId: varchar('twitch_user_id').primaryKey().notNull(),
+  login: varchar().notNull(),
+  displayName: varchar('display_name').default(''),
+  avatar: varchar().default(''),
+  addedBy: varchar('added_by').default(''),
   createdAt: timestamp('created_at', { mode: 'string' })
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),

@@ -22,21 +22,33 @@
             class="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-black italic text-white drop-shadow-2xl"
           >
             <template v-if="props.isOnline">Kevin ist online!</template>
-            <template v-else-if="props.prediction?.eventType === 'live'">
+            <template v-else-if="props.predictionData?.hasStreamedToday">
+              Heute war schon Stream
+            </template>
+            <template v-else-if="todayPrediction?.eventType === 'live'">
               Ja
             </template>
-            <template v-else-if="props.prediction?.eventType === 'offday'">
+            <template v-else-if="todayPrediction?.eventType === 'offday'">
               Nein
             </template>
             <template v-else>Keine Daten vorhanden</template>
           </h1>
           <h2
             class="text-3xl lg:text-4xl text-center italic text-neutral-200 drop-shadow-2xl"
-            v-if="!props.isOnline && props.prediction?.eventType === 'live'"
+            v-if="!props.isOnline && todayPrediction?.eventType === 'live' && !props.predictionData?.hasStreamedToday"
           >
             Kevin plant um
-            {{ useDateFormat(props.prediction?.date, 'HH:mm') }} Uhr online zu
+            {{ useDateFormat(todayPrediction.date, 'HH:mm') }} Uhr online zu
             kommen
+            <b class="-ml-1.5">*</b>
+          </h2>
+          <h2
+            v-if="showNextLiveInfo"
+            class="text-xl lg:text-3xl text-center italic text-neutral-200 drop-shadow-2xl mt-1"
+          >
+            Nächster Stream voraussichtlich am
+            {{ nextLiveDateLabel }}
+            Uhr
             <b class="-ml-1.5">*</b>
           </h2>
         </div>
@@ -53,8 +65,31 @@
 </template>
 
 <script lang="ts" setup>
+import type { TodayPredictionResponse } from '~~/shared/types/Prediction';
+
 const props = defineProps<{
   isOnline: boolean;
-  prediction: Prediction;
+  predictionData: TodayPredictionResponse | null;
 }>();
+
+const todayPrediction = computed(() => props.predictionData?.prediction);
+const nextLivePrediction = computed(() => props.predictionData?.nextLivePrediction);
+const nextLiveDateLabel = computed(() => {
+  if (!nextLivePrediction.value?.date) {
+    return '';
+  }
+
+  return useDateFormat(nextLivePrediction.value.date, 'dd.MM.yyyy [um] HH:mm').value;
+});
+const showNextLiveInfo = computed(() => {
+  if (props.isOnline || !nextLivePrediction.value) {
+    return false;
+  }
+
+  return (
+    props.predictionData?.hasStreamedToday
+    || todayPrediction.value?.eventType === 'offday'
+    || !todayPrediction.value
+  );
+});
 </script>

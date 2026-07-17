@@ -1,5 +1,3 @@
-import { vods } from "../db/schema";
-
 export interface Stream {
   id: string;
   user_id: string;
@@ -16,5 +14,5 @@ export interface Stream {
   tag_ids: string[];
   tags: string[];
   is_mature: boolean;
-  lastVod?: typeof vods.$inferSelect;
+  lastVod?: Vod;
 }

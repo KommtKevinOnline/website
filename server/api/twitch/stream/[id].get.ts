@@ -1,48 +1,40 @@
-async function getToken(): Promise<string> {
-  const res = await fetch('https://id.twitch.tv/oauth2/token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      client_id: process.env.TWITCH_CLIENT_ID,
-      client_secret: process.env.TWITCH_CLIENT_SECRET,
-      grant_type: 'client_credentials',
-    }),
-  });
-
-  const data = (await res.json()) as TokenResponse;
-
-  return data.access_token;
-}
-
-export default defineEventHandler(async (event) => {
-  if (!process.env.TWITCH_CLIENT_ID) {
-    throw new Error('Missing TWITCH_CLIENT_ID');
-  }
-
-  const userId = event.context.params?.id;
-
-  const streamRes = await $fetch<StreamsResponse>(
-    `https://api.twitch.tv/helix/streams?user_id=${userId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${await getToken()}`,
-        'client-id': process.env.TWITCH_CLIENT_ID,
-      },
+export default defineCachedEventHandler(
+  async (event) => {
+    if (!process.env.TWITCH_CLIENT_ID) {
+      throw createError({
+        statusCode: 500,
+        statusMessage: 'Missing TWITCH_CLIENT_ID',
+      });
     }
-  );
 
-  return {
-    type: 'offline',
-  };
+    const { id } = await useValidatedParams(event, {
+      id: z.string().regex(/^\d+$/),
+    });
 
-  // If online: return twitch data
-  if (streamRes && streamRes.data && streamRes.data.length !== 0) {
-    return streamRes.data[0];
-  } else {
+    try {
+      const streamRes = await $fetch<StreamsResponse>(
+        `https://api.twitch.tv/helix/streams?user_id=${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${await getTwitchAppToken()}`,
+            'client-id': process.env.TWITCH_CLIENT_ID,
+          },
+        }
+      );
+
+      if (streamRes?.data?.length) {
+        return streamRes.data[0];
+      }
+    } catch (error) {
+      console.error('Twitch stream lookup failed', error);
+    }
+
     return {
       type: 'offline',
     };
+  },
+  {
+    swr: true,
+    maxAge: 60,
   }
-});
+);

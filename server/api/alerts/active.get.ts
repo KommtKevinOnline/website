@@ -1,4 +1,4 @@
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const drizzle = useDrizzle();
 
   try {
@@ -6,14 +6,9 @@ export default defineEventHandler(async (event) => {
       where: eq(tables.alerts.active, true),
     });
 
-    if (!alert) {
-      return { active: false };
-    }
-
-    return alert;
+    return alert ?? null;
   } catch (error) {
     console.error(error);
+    return null;
   }
-
-  return { active: false };
 });

@@ -50,7 +50,7 @@ onMounted(() => {
     width: '100%',
     height: '100%',
     video: props.vod.vodid,
-    parent: ['localhost'],
+    parent: [window.location.hostname],
     autoplay: true,
     muted: true,
     time: props.vod.duration,

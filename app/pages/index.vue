@@ -1,5 +1,5 @@
 <template>
-  <Hero :isOnline="isOnline" :prediction="prediction" />
+  <Hero :isOnline="isOnline" :predictionData="predictionData" />
 
   <UContainer class="max-w-4xl">
     <TwitchCard v-if="streamData && isOnline" :streamInfo="streamData" />
@@ -31,7 +31,7 @@ const isOnline = computed(() => {
 
 const { data: vod } = await useFetch<Vod>('/api/vods/latest');
 
-const { data: prediction } = await useFetch<Prediction>(
+const { data: predictionData } = await useFetch<TodayPredictionResponse>(
   '/api/predictions/today'
 );
 </script>

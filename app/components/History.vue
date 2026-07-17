@@ -1,49 +1,32 @@
 <template>
   <UPageSection title="Historie">
     <template #description>
-      <UChip
-        text="Bald verfügbar!"
-        size="3xl"
-        :ui="{ base: 'p-2' }"
-        color="error"
-      >
-        <p>
-          Stream Historie, klicke auf einen Titel um mehr Infos zu dem Stream zu
-          erhalten.
-        </p>
-      </UChip>
+      <p>
+        Stream Historie, klicke auf einen Titel um mehr Infos zu dem Stream zu
+        erhalten.
+      </p>
     </template>
 
     <div v-if="vods" class="flex justify-center">
       <UTimeline color="neutral" :items="items" class="w-96">
         <template #title="{ item }">
-          <!-- <UButton
-            v-if="item.id === 'history'"
-            :to="item.url"
-            color="neutral"
-            variant="subtle"
-            trailing-icon="i-lucide-arrow-right"
-          >
+          <NuxtLink :to="item.url" class="hover:underline">
             {{ item.title }}
-          </UButton> -->
-
-          <!-- <NuxtLink v-else :to="item.url" target="_blank">
-            {{ item.title }}
-          </NuxtLink> -->
-
-          {{ item.title }}
+          </NuxtLink>
         </template>
 
         <template #description="{ item }">
-          <NuxtImg
-            v-if="item.thumbnail"
-            :src="item.thumbnail"
-            :alt="item.title"
-            class="w-full h-auto rounded-lg"
-            width="480"
-            height="270"
-            loading="lazy"
-          />
+          <NuxtLink :to="item.url">
+            <NuxtImg
+              v-if="item.thumbnail"
+              :src="item.thumbnail"
+              :alt="item.title"
+              class="w-full h-auto rounded-lg"
+              width="480"
+              height="270"
+              loading="lazy"
+            />
+          </NuxtLink>
         </template>
       </UTimeline>
     </div>
@@ -58,22 +41,13 @@ const { data: vods } = await useFetch<Vod[]>('/api/vods');
 const items = computed(() => {
   if (!vods.value) return [];
 
-  return [
-    ...vods.value.map((vod) => ({
-      id: vod.vodid,
-      url: `/videos/${vod.vodid}`,
-      date: useDateFormat(vod.date, 'DD. MMM YYYY').value,
-      title: vod.title,
-      icon: 'i-simple-icons-twitch',
-      thumbnail: getThumbnailUrl(vod.thumbnail, 480, 270),
-    })),
-    // {
-    //   id: 'history',
-    //   url: '/streams',
-    //   title: 'Gesamte Historie',
-    //   thumbnail: null,
-    //   icon: 'i-lucide-list',
-    // },
-  ] satisfies TimelineItem[];
+  return vods.value.map((vod) => ({
+    id: vod.vodid,
+    url: `/videos/${vod.vodid}`,
+    date: useDateFormat(vod.date, 'DD. MMM YYYY').value,
+    title: vod.title,
+    icon: 'i-simple-icons-twitch',
+    thumbnail: getThumbnailUrl(vod.thumbnail, 480, 270),
+  })) satisfies TimelineItem[];
 });
 </script>
