@@ -1,8 +1,9 @@
 <template>
-  <UContainer class="mt-8 mb-16">
+  <UContainer class="mb-16">
     <UPageSection
       title="Transkript-Suche"
       description="Was hat Kevin gesagt? Durchsucht die transkribierten letzten 5 Minuten aller erfassten Streams."
+      :ui="{ container: 'py-8 sm:py-8 lg:py-10' }"
     >
       <div class="max-w-2xl mx-auto flex flex-col gap-6">
         <UInput

@@ -1,8 +1,9 @@
 <template>
-  <UContainer class="mt-8 mb-16">
+  <UContainer class="mb-16">
     <UPageSection
       title="Statistiken"
       description="Wie zuverlässig sind Kevins Ansagen? Vergleich zwischen vorhergesagter und tatsächlicher Startzeit."
+      :ui="{ container: 'py-8 sm:py-8 lg:py-10' }"
     >
       <div v-if="stats" class="flex flex-col gap-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -39,7 +40,7 @@
             <p class="text-3xl text-highlighted font-semibold">
               {{ stats.onTimeRate != null ? `${stats.onTimeRate}%` : '—' }}
             </p>
-            <p class="text-xs text-muted mt-1">±15 Minuten</p>
+            <p class="text-xs text-muted mt-1">max. 15 Min. später</p>
           </UCard>
         </div>
 
