@@ -7,12 +7,13 @@
       orientation="horizontal"
       reverse
     >
-      <NuxtImg
+      <VodThumbnail
         v-if="data.thumbnail"
         :src="getThumbnailUrl(data.thumbnail, 1920, 1080)"
-        aspect-ratio="16/9"
-        class="w-full col-1 row-1 rounded-lg"
-        loading="lazy"
+        :alt="data.title ?? 'Stream'"
+        :width="1920"
+        :height="1080"
+        class="col-1 row-1"
       />
     </UPageSection>
 

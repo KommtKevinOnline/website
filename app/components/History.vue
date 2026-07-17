@@ -17,14 +17,12 @@
 
         <template #description="{ item }">
           <NuxtLink :to="item.url">
-            <NuxtImg
+            <VodThumbnail
               v-if="item.thumbnail"
               :src="item.thumbnail"
               :alt="item.title"
-              class="w-full h-auto rounded-lg"
-              width="480"
-              height="270"
-              loading="lazy"
+              :width="480"
+              :height="270"
             />
           </NuxtLink>
         </template>

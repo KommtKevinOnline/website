@@ -29,13 +29,12 @@
         <div v-if="results?.length" class="flex flex-col gap-3">
           <UCard v-for="(hit, index) in results" :key="index">
             <div class="flex gap-4 items-start">
-              <NuxtImg
+              <VodThumbnail
                 v-if="hit.thumbnail"
                 :src="getThumbnailUrl(hit.thumbnail, 160, 90)"
-                class="rounded-md shrink-0 hidden sm:block"
-                width="160"
-                height="90"
-                loading="lazy"
+                :width="160"
+                :height="90"
+                class="shrink-0 hidden sm:block max-w-40"
               />
 
               <div class="flex-1 min-w-0">
