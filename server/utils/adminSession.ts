@@ -30,19 +30,31 @@ export async function getEditor(event: H3Event): Promise<EditorUser | null> {
     return null;
   }
 
-  if (ownerIds().includes(user.id)) {
+  // Temporary diagnostics for the owner check
+  console.info(
+    '[admin] login check: user.id=%s owners=%s',
+    user.id,
+    JSON.stringify(ownerIds())
+  );
+
+  if (ownerIds().includes(String(user.id))) {
     return { ...user, isOwner: true };
   }
 
-  const editor = await useDrizzle().query.editors.findFirst({
-    where: eq(tables.editors.twitchUserId, user.id),
-  });
+  // Missing table (worker migration not applied yet) must not 500 the check
+  try {
+    const editor = await useDrizzle().query.editors.findFirst({
+      where: eq(tables.editors.twitchUserId, user.id),
+    });
 
-  if (!editor) {
-    return null;
+    if (editor) {
+      return { ...user, isOwner: false };
+    }
+  } catch (error) {
+    console.error('[admin] editors lookup failed', error);
   }
 
-  return { ...user, isOwner: false };
+  return null;
 }
 
 export async function requireEditor(event: H3Event): Promise<EditorUser> {
