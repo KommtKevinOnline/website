@@ -1,0 +1,12 @@
+@import 'tailwindcss';
+@import '@nuxt/ui';
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: 'DM Sans', sans-serif;
+}
+
+:root {
+  scroll-behavior: smooth;
+}

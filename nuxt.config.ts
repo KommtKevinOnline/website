@@ -1,63 +1,99 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: "2025-06-18",
+  compatibilityDate: '2024-11-01',
+  devtools: { enabled: true },
 
-  devtools: {
-    enabled: true,
+  future: {
+    compatibilityVersion: 4,
   },
-  extends: ["@nuxt/ui-pro"],
+
+  css: ['~/assets/css/main.css'],
+
   modules: [
-    "@nuxt/content",
-    "@vueuse/nuxt",
-    "@nuxt/image",
-    "@nuxtjs/robots",
-    "@nuxtjs/sitemap",
-    "@nuxt/test-utils/module",
-    "@nuxt/ui",
-    "nuxt-og-image",
-    "@nuxt/fonts",
+    '@nuxt/fonts',
+    '@nuxt/icon',
+    '@nuxt/ui',
+    '@nuxt/image',
+    '@vueuse/nuxt',
+    'nuxt-charts',
+    'nuxt-auth-utils',
+    'nuxt-og-image',
   ],
+
+  site: {
+    url: 'https://kommtkevinonline.de',
+    name: 'KommtKevinOnline?',
+  },
+
   runtimeConfig: {
-    app: {
-      postgresUrl: "",
+    database: {
+      url: undefined,
     },
+    // Comma-separated Twitch user ids that own the site (can manage editors)
+    adminTwitchIds: '',
   },
-  image: {
-    format: ["avif", "webp", "jpg"],
-  },
-  routeRules: {
-    "/": { swr: 300 },
-    "/admin/**": { index: false },
-  },
-  robots: {
-    disallow: "/admin",
-    sitemap: "/sitemap.xml",
-  },
-  // Fixes error when hotreloading (https://github.com/lovell/sharp/issues/3295)
+
   nitro: {
-    hooks: {
-      "dev:reload": () => require("sharp"),
+    experimental: {
+      tasks: true,
+    },
+    imports: {
+      dirs: ['server/utils'],
+      presets: [
+        {
+          from: 'zod',
+          imports: ['z'],
+        },
+        {
+          from: 'h3-zod',
+          imports: [
+            'useValidatedQuery',
+            'useValidatedBody',
+            'useValidatedParams',
+          ],
+        },
+      ],
     },
   },
-  imports: {
-    dirs: ["interfaces", "types"],
-    presets: [
+
+  image: {
+    domains: ['static-cdn.jtvnw.net'],
+    ipx: {
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+    },
+  },
+
+  ui: {
+    theme: {
+      colors: [
+        'primary',
+        'secondary',
+        'success',
+        'info',
+        'warning',
+        'error',
+        'purple',
+      ],
+    },
+  },
+
+  fonts: {
+    families: [
       {
-        from: "luxon",
-        imports: ["DateTime"],
+        name: 'DM Sans',
+        provider: 'google',
+        weights: [
+          '100',
+          '200',
+          '300',
+          '400',
+          '500',
+          '600',
+          '700',
+          '800',
+          '900',
+        ],
       },
     ],
-  },
-  ui: {
-    icons: ["heroicons", "simple-icons", "mdi"],
-  },
-  site: {
-    url: "https://kommtkevinonline.de",
-  },
-  sitemap: {
-    include: ["/", "/faq"],
-  },
-  experimental: {
-    renderJsonPayloads: false,
   },
 });

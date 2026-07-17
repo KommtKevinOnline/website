@@ -1,33 +1,39 @@
-import { db } from "../../db";
-import { vods } from "../../../db/schema";
-import { desc } from "drizzle-orm";
-import { DateTime } from "luxon";
-import hasOnlineIntend from "../../../utils/hasOnlineIntend";
+import { DateTime } from 'luxon';
 
-export default defineEventHandler(async (event) => {
-  const lastVod = await db.query.vods.findFirst({
-    orderBy: [desc(vods.date)],
-  });
+function formatTime(value: string) {
+  return parseDbDate(value).setZone('Europe/Berlin').toFormat('HH:mm');
+}
 
-  if (!lastVod || !lastVod.onlineIntendDate || !lastVod.date) return `4Shrug`;
+function formatDay(value: string) {
+  return parseDbDate(value)
+    .setZone('Europe/Berlin')
+    .setLocale('de')
+    .toFormat('cccc dd.MM.');
+}
 
-  const onlineIntendDates = lastVod.onlineIntendDate
-    .split(",")
-    .map((dateString: string) => new Date(dateString));
+export default defineEventHandler(async () => {
+  const { now, todayPrediction, nextLivePrediction } =
+    await getPredictionOverview();
 
-  const onlineIntend = hasOnlineIntend(
-    new Date(lastVod.date),
-    onlineIntendDates
-  );
-
-  if (onlineIntend) {
-    const timeString = DateTime.fromJSDate(onlineIntendDates[0])
-      .setZone("UTC")
-      .setLocale("de")
-      .toLocaleString(DateTime.TIME_24_SIMPLE);
-
-    return `Kevin plant um ${timeString} Uhr online zu gehen. Pag`;
+  if (
+    todayPrediction?.eventType === 'live'
+    && todayPrediction.date
+    && parseDbDate(todayPrediction.date) > now
+  ) {
+    return `Kevin plant um ${formatTime(todayPrediction.date)} Uhr online zu gehen. Pag`;
   }
 
-  return `Kevin kommt heute nicht online. Saj`;
+  if (todayPrediction?.eventType === 'offday') {
+    if (nextLivePrediction?.date) {
+      return `Kevin kommt heute nicht online. Saj Nächster Stream voraussichtlich am ${formatDay(nextLivePrediction.date)} um ${formatTime(nextLivePrediction.date)} Uhr.`;
+    }
+
+    return `Kevin kommt heute nicht online. Saj`;
+  }
+
+  if (nextLivePrediction?.date) {
+    return `Nächster Stream voraussichtlich am ${formatDay(nextLivePrediction.date)} um ${formatTime(nextLivePrediction.date)} Uhr. Pag`;
+  }
+
+  return `4Shrug`;
 });
