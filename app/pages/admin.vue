@@ -251,9 +251,10 @@ const toast = useToast();
 
 const { data: me } = await useFetch('/api/admin/me');
 
-// Logged in but not owner/mod: straight back to the homepage
+// Logged in but not owner/mod (e.g. mod rights revoked mid-session):
+// back to the homepage with an error toast
 if (loggedIn.value && !me.value) {
-  await navigateTo('/');
+  await navigateTo('/?login=denied');
 }
 
 const { data: predictions, refresh: refreshPredictions } = await useFetch(

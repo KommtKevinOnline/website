@@ -15,22 +15,21 @@ function ownerIds(): string[] {
     .filter(Boolean);
 }
 
+interface SessionUser {
+  id: string;
+  login: string;
+  displayName: string;
+  avatar: string;
+}
+
 /**
- * Resolves the session user's role: site owners come from the
+ * Resolves a Twitch user's role: site owners come from the
  * NUXT_ADMIN_TWITCH_IDS runtime config, editors (channel mods) from the
  * editors table. Returns null when the user has neither role.
  */
-export async function getEditor(event: H3Event): Promise<EditorUser | null> {
-  const session = await getUserSession(event);
-  const user = session.user as
-    | { id: string; login: string; displayName: string; avatar: string }
-    | undefined;
-
-  if (!user) {
-    return null;
-  }
-
-  // Temporary diagnostics for the owner check
+export async function resolveEditor(
+  user: SessionUser
+): Promise<EditorUser | null> {
   console.info(
     '[admin] login check: user.id=%s owners=%s',
     user.id,
@@ -55,6 +54,17 @@ export async function getEditor(event: H3Event): Promise<EditorUser | null> {
   }
 
   return null;
+}
+
+export async function getEditor(event: H3Event): Promise<EditorUser | null> {
+  const session = await getUserSession(event);
+  const user = session.user as SessionUser | undefined;
+
+  if (!user) {
+    return null;
+  }
+
+  return await resolveEditor(user);
 }
 
 export async function requireEditor(event: H3Event): Promise<EditorUser> {

@@ -13,6 +13,31 @@
 </template>
 
 <script lang="ts" setup>
+const route = useRoute();
+const toast = useToast();
+
+onMounted(() => {
+  if (route.query.login === 'denied') {
+    toast.add({
+      title: 'Kein Zugriff',
+      description: 'Dein Twitch-Account ist kein Mod dieser Seite.',
+      color: 'error',
+      icon: 'i-lucide-circle-x',
+    });
+  } else if (route.query.login === 'error') {
+    toast.add({
+      title: 'Login fehlgeschlagen',
+      description: 'Bitte versuche es später erneut.',
+      color: 'error',
+      icon: 'i-lucide-circle-x',
+    });
+  }
+
+  if (route.query.login) {
+    navigateTo('/', { replace: true });
+  }
+});
+
 const { data: streamData } = await useFetch<Stream>(
   '/api/twitch/stream/50985620'
 );
