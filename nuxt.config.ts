@@ -16,12 +16,21 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@vueuse/nuxt',
     'nuxt-charts',
+    'nuxt-auth-utils',
+    'nuxt-og-image',
   ],
+
+  site: {
+    url: 'https://kommtkevinonline.de',
+    name: 'KommtKevinOnline?',
+  },
 
   runtimeConfig: {
     database: {
       url: undefined,
     },
+    // Comma-separated Twitch user ids that own the site (can manage editors)
+    adminTwitchIds: '',
   },
 
   nitro: {

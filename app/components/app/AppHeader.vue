@@ -22,6 +22,16 @@ const items = computed<NavigationMenuItem[]>(() => [
     icon: 'i-lucide-house',
   },
   {
+    label: 'Statistiken',
+    to: '/stats',
+    icon: 'i-lucide-chart-line',
+  },
+  {
+    label: 'Suche',
+    to: '/search',
+    icon: 'i-lucide-search',
+  },
+  {
     label: 'Games',
     to: 'https://games.kommtkevinonline.de',
     icon: 'i-lucide-joystick',

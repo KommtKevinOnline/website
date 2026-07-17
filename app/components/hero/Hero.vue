@@ -35,11 +35,24 @@
           </h1>
           <h2
             class="text-3xl lg:text-4xl text-center italic text-neutral-200 drop-shadow-2xl"
-            v-if="!props.isOnline && todayPrediction?.eventType === 'live' && !props.predictionData?.hasStreamedToday"
+            v-if="showTodayInfo"
           >
             Kevin plant um
-            {{ useDateFormat(todayPrediction.date, 'HH:mm') }} Uhr online zu
+            {{ useDateFormat(todayPrediction!.date, 'HH:mm') }} Uhr online zu
             kommen
+            <b class="-ml-1.5">*</b>
+          </h2>
+          <h2
+            v-if="showTodayInfo && countdownLabel"
+            class="text-xl lg:text-2xl text-center italic text-neutral-200 drop-shadow-2xl mt-1"
+          >
+            Noch {{ countdownLabel }}
+          </h2>
+          <h2
+            v-if="showTodayInfo && todayPrediction?.topic"
+            class="text-xl lg:text-2xl text-center italic text-neutral-200 drop-shadow-2xl mt-1"
+          >
+            Geplant: {{ todayPrediction.topic }}
             <b class="-ml-1.5">*</b>
           </h2>
           <h2
@@ -73,14 +86,52 @@ const props = defineProps<{
 }>();
 
 const todayPrediction = computed(() => props.predictionData?.prediction);
-const nextLivePrediction = computed(() => props.predictionData?.nextLivePrediction);
+const nextLivePrediction = computed(
+  () => props.predictionData?.nextLivePrediction
+);
+
+const showTodayInfo = computed(() => {
+  return (
+    !props.isOnline
+    && !props.predictionData?.hasStreamedToday
+    && todayPrediction.value?.eventType === 'live'
+  );
+});
+
+const now = useNow({ interval: 1000 });
+
+const countdownLabel = computed(() => {
+  if (!todayPrediction.value?.date) {
+    return '';
+  }
+
+  const diffMs =
+    new Date(todayPrediction.value.date).getTime() - now.value.getTime();
+
+  if (diffMs <= 0) {
+    return '';
+  }
+
+  const totalMinutes = Math.floor(diffMs / 60_000);
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  if (hours > 0) {
+    return `${hours} Std. ${minutes} Min.`;
+  }
+
+  return `${minutes} Min.`;
+});
+
 const nextLiveDateLabel = computed(() => {
   if (!nextLivePrediction.value?.date) {
     return '';
   }
 
-  return useDateFormat(nextLivePrediction.value.date, 'dd.MM.yyyy [um] HH:mm').value;
+  return useDateFormat(nextLivePrediction.value.date, 'DD.MM.YYYY [um] HH:mm')
+    .value;
 });
+
 const showNextLiveInfo = computed(() => {
   if (props.isOnline || !nextLivePrediction.value) {
     return false;
