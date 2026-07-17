@@ -90,7 +90,8 @@ export default defineCachedEventHandler(
       ? Math.round(delays.reduce((a, b) => a + b, 0) / delays.length)
       : null;
 
-    const onTimeCount = delays.filter((d) => Math.abs(d) <= 15).length;
+    // Early starts always count as on time; only >15 min late is late
+    const onTimeCount = delays.filter((d) => d <= 15).length;
 
     return {
       totalStreams: streams.length + vodDays,

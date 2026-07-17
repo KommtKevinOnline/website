@@ -131,17 +131,16 @@ function formatDelay(minutes: number | null) {
   }
 
   if (minutes < 0) {
-    return `-${label}`;
+    return `${label} früher`;
   }
 
   return 'pünktlich';
 }
 
+// Early starts are never a problem; only lateness counts
 function delayColor(minutes: number) {
-  const abs = Math.abs(minutes);
-
-  if (abs <= 15) return 'success';
-  if (abs <= 60) return 'warning';
+  if (minutes <= 15) return 'success';
+  if (minutes <= 60) return 'warning';
   return 'error';
 }
 
