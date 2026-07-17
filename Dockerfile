@@ -6,7 +6,7 @@ ARG PORT=3000
 
 WORKDIR /src
 
-COPY package.json pnpm-lock.yaml ./
+COPY package.json pnpm-lock.yaml .npmrc ./
 RUN pnpm install
 
 COPY --link . .
