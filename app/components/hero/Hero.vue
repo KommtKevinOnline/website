@@ -42,9 +42,15 @@
             class="text-3xl lg:text-4xl text-center italic text-neutral-200 drop-shadow-2xl"
             v-if="showTodayInfo"
           >
-            Kevin plant um
-            {{ useDateFormat(todayPrediction!.date, 'HH:mm') }} Uhr online zu
-            kommen
+            <template v-if="todayTimeIsFirm">
+              Kevin plant um
+              {{ useDateFormat(todayPrediction!.date, 'HH:mm') }} Uhr online zu
+              kommen
+            </template>
+            <template v-else>
+              Kevin kommt voraussichtlich gegen
+              {{ useDateFormat(todayPrediction!.date, 'HH:mm') }} Uhr online
+            </template>
             <b class="-ml-1.5">*</b>
           </h2>
           <h2
@@ -101,6 +107,13 @@ const showTodayInfo = computed(() => {
     && !props.predictionData?.hasStreamedToday
     && todayPrediction.value?.eventType === 'live'
   );
+});
+
+// An explicitly announced time gets high confidence from the engine
+// (>= 0.85); default-time predictions and old rows (null) read softer.
+const todayTimeIsFirm = computed(() => {
+  const confidence = todayPrediction.value?.confidence;
+  return confidence != null && confidence >= 0.85;
 });
 
 const now = useNow({ interval: 1000 });
