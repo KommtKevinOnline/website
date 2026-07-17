@@ -17,13 +17,33 @@
 </template>
 
 <script setup lang="ts">
-useHead({
-  script: [
-    {
-      src: 'https://player.twitch.tv/js/embed/v1.js',
-    },
-  ],
-});
+const TWITCH_EMBED_SRC = 'https://player.twitch.tv/js/embed/v1.js';
+
+// useHead-injected scripts load async and can lose the race against
+// onMounted, so the player script is loaded and awaited explicitly.
+function loadTwitchScript(): Promise<void> {
+  return new Promise((resolve, reject) => {
+    // @ts-ignore
+    if (window.Twitch?.Player) {
+      return resolve();
+    }
+
+    let script = document.querySelector<HTMLScriptElement>(
+      `script[src="${TWITCH_EMBED_SRC}"]`
+    );
+
+    if (!script) {
+      script = document.createElement('script');
+      script.src = TWITCH_EMBED_SRC;
+      document.head.appendChild(script);
+    }
+
+    script.addEventListener('load', () => resolve());
+    script.addEventListener('error', () =>
+      reject(new Error('Failed to load Twitch player script'))
+    );
+  });
+}
 
 const props = defineProps<{ vod: Vod }>();
 
@@ -45,7 +65,14 @@ function toggleMute() {
   }
 }
 
-onMounted(() => {
+onMounted(async () => {
+  try {
+    await loadTwitchScript();
+  } catch (error) {
+    console.error(error);
+    return;
+  }
+
   const options = {
     width: '100%',
     height: '100%',
