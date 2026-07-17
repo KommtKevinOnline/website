@@ -2,7 +2,7 @@
   <UPageSection id="faq" title="FAQ">
     <template #description>
       <p>Fragen oder Anmerkungen zu dem Projekt?</p>
-      <div class="flex gap-2 justify-center items-center">
+      <div class="flex flex-wrap gap-2 justify-center items-center">
         <UButton
           class="mt-4 rounded-full"
           variant="subtle"

@@ -15,24 +15,7 @@
       </UButton>
     </UCard>
 
-    <UCard v-else-if="!me" class="max-w-md mx-auto text-center">
-      <template #header>
-        <h1 class="text-2xl font-bold">Kein Zugriff</h1>
-      </template>
-
-      <p class="text-muted">
-        Dein Twitch-Account ({{ user?.displayName }}) ist kein Mod dieser
-        Seite.
-      </p>
-
-      <template #footer>
-        <UButton color="neutral" variant="subtle" @click="logout">
-          Abmelden
-        </UButton>
-      </template>
-    </UCard>
-
-    <div v-else class="flex flex-col gap-6">
+    <div v-else-if="me" class="flex flex-col gap-6">
       <div class="flex items-center justify-between">
         <h1 class="text-3xl font-bold">Admin</h1>
 
@@ -267,6 +250,11 @@ const { loggedIn, user, clear } = useUserSession();
 const toast = useToast();
 
 const { data: me } = await useFetch('/api/admin/me');
+
+// Logged in but not owner/mod: straight back to the homepage
+if (loggedIn.value && !me.value) {
+  await navigateTo('/');
+}
 
 const { data: predictions, refresh: refreshPredictions } = await useFetch(
   '/api/admin/predictions',

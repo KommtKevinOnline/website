@@ -83,6 +83,15 @@ const columns: FooterColumn[] = [
     ],
   },
   {
+    label: 'Intern',
+    children: [
+      {
+        label: 'Mod Login',
+        to: '/admin',
+      },
+    ],
+  },
+  {
     label: 'Mehr Tools',
     children: [
       {

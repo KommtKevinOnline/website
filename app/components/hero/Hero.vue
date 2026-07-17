@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 md:p-6 flex flex-col gap-2">
+  <UContainer class="py-4 md:py-6 flex flex-col gap-2">
     <div class="grid">
       <div class="col-1 row-1">
         <div
@@ -20,6 +20,9 @@
         <div class="flex flex-col items-center justify-center h-full">
           <h1
             class="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-black italic text-white drop-shadow-2xl"
+            :class="{
+              'lg:text-7xl!': props.isOnline,
+            }"
           >
             <template v-if="props.isOnline">Kevin ist online!</template>
             <template v-else-if="props.predictionData?.hasStreamedToday">
@@ -31,7 +34,9 @@
             <template v-else-if="todayPrediction?.eventType === 'offday'">
               Nein
             </template>
-            <template v-else>Keine Daten vorhanden</template>
+            <div v-else class="text-center lg:text-7xl">
+              Keine Daten vorhanden
+            </div>
           </h1>
           <h2
             class="text-3xl lg:text-4xl text-center italic text-neutral-200 drop-shadow-2xl"
@@ -74,7 +79,7 @@
         zu Fehlern kommen. Es gibt keine Garantie für die Genauigkeit der Infos.
       </h3>
     </div>
-  </div>
+  </UContainer>
 </template>
 
 <script lang="ts" setup>
