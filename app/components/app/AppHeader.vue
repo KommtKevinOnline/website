@@ -40,7 +40,7 @@ const items = computed<NavigationMenuItem[]>(() => [
   },
   {
     label: 'FAQ',
-    to: '#faq',
+    to: '/#faq',
     icon: 'i-lucide-circle-help',
   },
 ]);

@@ -69,7 +69,7 @@ const columns: FooterColumn[] = [
       },
       {
         label: 'FAQ',
-        to: '#faq',
+        to: '/#faq',
       },
     ],
   },
