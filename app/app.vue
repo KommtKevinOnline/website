@@ -28,6 +28,13 @@ useHead({
     { key: 'theme-color', name: 'theme-color', content: color },
   ],
   link: [{ rel: 'icon', href: '/favicon.ico' }],
+  script: [
+    {
+      src: 'https://analytics.niki2k1.dev/js/script.js',
+      defer: true,
+      'data-domain': 'kommtkevinonline.de',
+    },
+  ],
   htmlAttrs: {
     lang: 'de',
   },
