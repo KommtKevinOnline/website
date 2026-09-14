@@ -2,7 +2,7 @@
   <div
     ref="containerRef"
     :class="className"
-    :style="style"
+    :style="webglFailed ? { ...style, background: fallbackBackground } : style"
     class="w-full h-full"
   ></div>
 </template>
@@ -105,6 +105,27 @@ void main() {
   gl_FragColor = col;
 }
 `;
+
+const webglFailed = ref(false);
+
+const fallbackBackground = computed(() => {
+  const [r, g, b] = hexToNormalizedRGB(props.color);
+  const dim = ([r, g, b] as const).map((c) => Math.round(c * 0.55 * 255));
+  return `linear-gradient(135deg, rgb(${Math.round(r * 255)}, ${Math.round(g * 255)}, ${Math.round(b * 255)}), rgb(${dim[0]}, ${dim[1]}, ${dim[2]}))`;
+});
+
+const isWebGLAvailable = (): boolean => {
+  try {
+    const canvas = document.createElement('canvas');
+    return !!(
+      canvas.getContext('webgl2') ||
+      canvas.getContext('webgl') ||
+      canvas.getContext('experimental-webgl')
+    );
+  } catch {
+    return false;
+  }
+};
 
 let renderer: Renderer | null = null;
 let mesh: Mesh | null = null;
@@ -247,7 +268,17 @@ const cleanup = () => {
 };
 
 onMounted(() => {
-  initSilk();
+  if (!isWebGLAvailable()) {
+    webglFailed.value = true;
+    return;
+  }
+  try {
+    initSilk();
+  } catch (error) {
+    console.warn('WebGL init failed, using static background:', error);
+    webglFailed.value = true;
+    cleanup();
+  }
 });
 
 onUnmounted(() => {

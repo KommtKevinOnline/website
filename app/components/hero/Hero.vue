@@ -3,7 +3,7 @@
     <div class="grid">
       <div class="col-1 row-1">
         <div
-          class="h-48 sm:h-[300px] lg:h-[512px] w-full relative overflow-hidden rounded-2xl"
+          class="h-full min-h-48 sm:min-h-[300px] lg:min-h-[512px] w-full relative overflow-hidden rounded-2xl"
         >
           <HeroBackgroundSilk
             :speed="4"
@@ -11,13 +11,13 @@
             :color="'#42E695'"
             :noise-intensity="1.2"
             :rotation="1.2"
-            class="rounded-2xl h-96"
+            class="rounded-2xl"
             background-color="white"
           />
         </div>
       </div>
       <div class="col-1 row-1 z-10">
-        <div class="flex flex-col items-center justify-center h-full">
+        <div class="flex flex-col items-center justify-center h-full px-4 py-6">
           <h1
             class="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-black italic text-white drop-shadow-2xl"
             :class="{

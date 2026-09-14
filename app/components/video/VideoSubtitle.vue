@@ -1,9 +1,9 @@
 <template>
   <div
     v-if="currentSegment"
-    class="absolute h-9 md:h-12 max-w-max top-2 md:self-end md:bottom-20 justify-self-center bg-[#42E695] rounded-lg p-2 text-emerald-950"
+    class="absolute top-2 md:top-auto md:bottom-20 left-1/2 -translate-x-1/2 w-max max-w-[calc(100%-1rem)] bg-[#42E695] rounded-lg p-2 text-emerald-950"
   >
-    <p class="text-sm md:text-lg font-bold overflow-hidden text-ellipsis">
+    <p class="text-sm md:text-lg font-bold text-center">
       {{ currentSegment.text }}
     </p>
   </div>
@@ -43,7 +43,8 @@ const currentSegmentIndex = computed(() => {
 });
 
 const currentSegment = computed(() => {
-  if (!segments.value || !currentSegmentIndex.value) return null;
+  if (!segments.value || currentSegmentIndex.value == null) return null;
+  if (currentSegmentIndex.value < 0) return null;
 
   return segments.value[currentSegmentIndex.value];
 });
