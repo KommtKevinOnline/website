@@ -1,4 +1,4 @@
-FROM node:lts-slim AS build
+FROM node:24.22.1-slim AS build
 
 RUN corepack enable
 
@@ -14,7 +14,7 @@ COPY --link . .
 RUN pnpm run build
 
 # Run
-FROM node:lts-slim
+FROM node:24.22.1-slim
 
 ENV PORT=$PORT
 ENV TZ=Europe/Berlin
